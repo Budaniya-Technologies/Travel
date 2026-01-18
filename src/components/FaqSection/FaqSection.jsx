@@ -4,29 +4,30 @@ import { useState } from "react";
 const faqData = [
   {
     id: 1,
-    question: "How do I book a ParvatYatra trip?",
+    question: "How do I book a YatraKaro trip?",
     answer:
-      "You can book your trip directly from our website by selecting your destination, preferred dates, and completing the secure payment process.",
+      "You can easily book your journey through the YatraKaro website by selecting your destination, travel dates, and completing the secure checkout process.",
   },
   {
     id: 2,
-    question: "What payment methods are accepted?",
+    question: "What payment methods does YatraKaro accept?",
     answer:
-      "We accept UPI, credit/debit cards, net banking, and PayPal for international travelers.",
+      "YatraKaro accepts UPI, credit/debit cards, net banking, and PayPal for international travelers.",
   },
   {
     id: 3,
-    question: "Can I cancel or reschedule my trek?",
+    question: "Can I cancel or reschedule my trip?",
     answer:
-      "Yes! You can cancel or reschedule your booking up to 7 days before the trip, subject to our policy.",
+      "Yes! You can cancel or reschedule your booking up to 7 days before departure, as per YatraKaro’s cancellation policy.",
   },
   {
     id: 4,
-    question: "How do I contact ParvatYatra support?",
+    question: "How can I contact YatraKaro support?",
     answer:
-      "You can reach us via email, WhatsApp, or our 24/7 live chat support available on the website.",
+      "You can reach YatraKaro via email, WhatsApp, or our 24/7 live chat support available directly on the website.",
   },
 ];
+
 
 export default function FaqSection() {
   const [openId, setOpenId] = useState(null);
