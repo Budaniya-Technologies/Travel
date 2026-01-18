@@ -132,14 +132,14 @@ const FeaturedProgram = () => {
           <div className="relative">
             <button
               onClick={() => swiperRef.current?.slidePrev()}
-              className="absolute -left-6 top-1/2 z-10 bg-white p-3 rounded-full shadow-md"
+              className="absolute -left-6 top-1/2 z-10 bg-white text-black p-3 rounded-full shadow-md"
             >
               <FaChevronLeft />
             </button>
 
             <button
               onClick={() => swiperRef.current?.slideNext()}
-              className="absolute -right-6 top-1/2 z-10 bg-white p-3 rounded-full shadow-md"
+              className="absolute -right-6 top-1/2 z-10 bg-white text-black p-3 rounded-full shadow-md"
             >
               <FaChevronRight />
             </button>
