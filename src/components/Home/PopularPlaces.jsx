@@ -168,9 +168,7 @@ const PopularPlaces = () => {
 
                     {/* TWO BUTTONS */}
                     <div className="flex gap-2">
-                      <button className="flex-1 text-xs py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-500 transition">
-                        View All Packages
-                      </button>
+                      
 
                       <button className="flex-1 text-xs py-2 rounded-lg border border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition">
                         Enquiry Now
