@@ -1,100 +1,210 @@
 "use client";
-import React from "react";
-// import { motion } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
+import React, { useState, useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const places = [
-  {
-    id: 1,
-    title: "Taj Mahal, Agra",
-    img: "https://www.indiaincredible.co.in/public/cache/9477tajmahal_1280_x_550.webp",
-  },
-  {
-    id: 2,
-    title: "Jaipur, Rajasthan",
-    img: "https://cdn.triptotemples.com/75671.png",
-  },
-  {
-    id: 3,
-    title: "Varanasi, Uttar Pradesh",
-    img: "https://www.tripsavvy.com/thmb/Ajy3r-RV1ePYMzE2BHUMm9PDjhE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-499619311-6ed67e3db89248bc97942574a4f8e8d6.jpg",
-  },
-  {
-    id: 4,
-    title: "Kerala Backwaters",
-    img: "https://images.unsplash.com/photo-1558431382-27e303142255",
-  },
-  {
-    id: 5,
-    title: "Himalayas, Himachal Pradesh",
-    img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-  },
-  {
-    id: 6,
-    title: "Goa Beaches",
-    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-  },
-];
+const PopularPlaces = () => {
+  const scrollRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-const PopularPlacesSlider = () => {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!scrollRef.current) return;
+
+      if (canScrollRight) {
+        scroll("right");
+      } else {
+        scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      }
+    }, 3000); // 3 seconds
+
+    return () => clearInterval(interval);
+  }, [canScrollRight]);
+
+  const categories = [
+    {
+      id: 1,
+      title: "Karala Tour",
+      price: " /-",
+      img: "https://i.pinimg.com/736x/31/bc/84/31bc84e0fa95c63cffe8a77f39d3e894.jpg",
+      link: "#",
+    },
+    {
+      id: 2,
+      title: "Jaisalmer",
+      price: "/-",
+      img: "https://i.pinimg.com/1200x/97/cb/8f/97cb8f1f5022d5a38ce14e89935911c4.jpg",
+      link: "#",
+    },
+    {
+      id: 3,
+      title: "Goa Beech",
+      price: "/-",
+      img: "https://i.pinimg.com/1200x/60/37/9a/60379a968deddaa202abffc3b2f02215.jpg",
+      link: "#",
+    },
+    {
+      id: 4,
+      title: "Manali",
+      price: "/-",
+      img: "https://i.pinimg.com/1200x/27/90/8e/27908e1df16216f2530124965f59cdf8.jpg",
+      link: "#",
+    },
+  ];
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollAmount = clientWidth * 0.8;
+      const scrollTo =
+        direction === "left"
+          ? scrollLeft - scrollAmount
+          : scrollLeft + scrollAmount;
+
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
+    }
+  };
+
+  const checkScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
   return (
-    <section className="py-8 md:py-12 bg-gray-100">
-      {/* <motion.h2
-        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-8 md:mb-12 text-yellow-900 relative"
-        initial={{ y: -50, rotateX: 20, opacity: 0, scale: 0.9 }}
-        animate={{ y: 0, rotateX: 0, opacity: 1, scale: 1 }}
-        transition={{ type: "spring", stiffness: 120, damping: 12 }}
-        whileHover={{
-          rotateX: -10,
-          rotateY: 10,
-          scale: 1.08,
-          textShadow: "0px 0px 15px rgba(59, 130, 246, 0.7)",
-          transition: { duration: 0.5 },
-        }}
-        style={{ perspective: 1200 }}
-      >
-        Explore the Wonders of <span className="text-blue-600">India</span>
-      </motion.h2> */}
+    // Reduced px-20 to px-4 on mobile for better space usage
+    <section className="max-w-[1440px] mx-auto px-4 md:px-20 py-2 md:py-9">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start lg:items-center">
+        {/* LEFT SIDE: Heading Content */}
+        <div className="w-full lg:w-3/5 space-y-4 md:space-y-2">
+          <span className="text-red-500 font-semibold tracking-widest uppercase text-xs md:text-sm">
+            Curated Collections
+          </span>
+          {/* Fixed mobile text size to be readable but modern */}
+          <h2 className="text-3xl md:text-3xl font-serif text-gray-900 leading-lose">
+            Popular Travel Destinations
+          </h2>
 
-      <h2 className="text-3xl font-bold text-center mb-10 text-blue-700">
-        Explore the Wonders of India
-      </h2>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <button className="px-5 py-2 rounded-full bg-red-500 text-white text-sm font-semibold hover:bg-red-600 transition">
+              View All 
+            </button>
+          </div>
 
-      <Swiper
-        modules={[Navigation, Autoplay]}
-        spaceBetween={16}
-        slidesPerView={1}
-        navigation
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
-        breakpoints={{
-          320: { slidesPerView: 1, spaceBetween: 12 },
-          640: { slidesPerView: 2, spaceBetween: 16 },
-          768: { slidesPerView: 3, spaceBetween: 20 },
-          1024: { slidesPerView: 4, spaceBetween: 24 },
-        }}
-        className="max-w-[95%] mx-auto"
-      >
-        {places.map((place) => (
-          <SwiperSlide key={place.id} className="flex justify-center">
-            <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-80 rounded-xl overflow-hidden shadow-lg group">
-              <img
-                src={place.img}
-                alt={place.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition duration-300"></div>
-              <h3 className="absolute top-3 sm:top-4 left-3 sm:left-4 text-sm sm:text-lg md:text-xl font-semibold text-white drop-shadow-lg">
-                {place.title}
-              </h3>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          <p className="text-gray-600 text-base md:text-lg max-w-md">
+            Explore our latest arrivals across
+            <br className="hidden md:block" /> fashion and lifestyle.
+          </p>
+
+          {/* Custom Navigation for Desktop */}
+          <div className="hidden lg:flex gap-4 pt-4">
+            <button
+              onClick={() => scroll("left")}
+              disabled={!canScrollLeft}
+              className={`p-3 rounded-full border transition-all ${
+                !canScrollLeft
+                  ? "border-gray-200 text-gray-300"
+                  : "border-black text-black hover:bg-black hover:text-white"
+              }`}
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              disabled={!canScrollRight}
+              className={`p-3 rounded-full border transition-all ${
+                !canScrollRight
+                  ? "border-gray-200 text-gray-300"
+                  : "border-black text-black hover:bg-black hover:text-white"
+              }`}
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE: Slider */}
+        <div className="w-full lg:w-4/5 relative group">
+          <div
+            ref={scrollRef}
+            onScroll={checkScroll}
+            className="flex overflow-x-auto gap-3 md:gap-6 scrollbar-hide snap-x snap-mandatory pb-4"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {categories.map((item) => (
+              <div
+                key={item.id}
+                className="flex-none w-[calc(50%-6px)] md:w-[320px] snap-start"
+              >
+                <div className="relative h-[250px] md:h-[380px] w-full overflow-hidden group/card rounded-xl shadow-lg">
+                  {/* Image */}
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                  />
+
+                  {/* Dark travel overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-100" />
+
+                  {/* TOP HEADING ON IMAGE */}
+                  <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">
+                    <span className="text-white text-xs font-semibold tracking-wide">
+                      🌍 Travel Destination
+                    </span>
+                  </div>
+
+                  {/* Bottom Content Box */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md rounded-t-xl">
+                    <h3 className="text-lg font-bold text-gray-900 truncate">
+                      {item.title}
+                    </h3>
+
+                    <p className="text-gray-600 text-xs mb-3">
+                      Starting from ₹{item.price}
+                    </p>
+
+                    {/* TWO BUTTONS */}
+                    <div className="flex gap-2">
+                      <button className="flex-1 text-xs py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-500 transition">
+                        View All Packages
+                      </button>
+
+                      <button className="flex-1 text-xs py-2 rounded-lg border border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition">
+                        Enquiry Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Arrows - Simplified */}
+          <div className="flex lg:hidden justify-center gap-4 mt-4">
+            <button
+              onClick={() => scroll("left")}
+              className={`p-2 border rounded-full ${
+                !canScrollLeft ? "opacity-30" : "opacity-100"
+              }`}
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className={`p-2 border rounded-full ${
+                !canScrollRight ? "opacity-30" : "opacity-100"
+              }`}
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
 
-export default PopularPlacesSlider;
+export default PopularPlaces;

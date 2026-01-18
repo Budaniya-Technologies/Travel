@@ -1,54 +1,206 @@
-"use client";
-import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import Link from "next/link";
+import { 
+  FaFacebookF, 
+  FaInstagram, 
+  FaMapMarkerAlt, 
+  FaPhoneAlt, 
+  FaEnvelope, 
+  FaChevronRight, 
+  FaPaperPlane, 
+  FaHeart 
+} from "react-icons/fa";
 
 export default function Footer() {
+  const socialLinks = [
+    { icon: FaFacebookF, url: "https://www.facebook.com/share/1GM5h8u3r8/" },
+    { icon: FaInstagram, url: "https://www.instagram.com/yatra.karo?igsh=d3o0Nmk1dzNibmt0" },
+  ];
+
+  const quickLinks = [
+    { name: "Home", link: "/" },
+    { name: "About Us", link: "/" },
+    { name: "Destinations", link: "/" },
+    { name: "Packages", link: "/" },
+    { name: "Gallery", link: "/" },
+  ];
+
+  const OurDestinitions = [
+    { name: "Rajasthan", link: "/" },
+    { name: "J&K", link: "/" },
+    { name: "Himachal Pradesh", link: "/" },
+    { name: "South India", link: "/" },
+    { name: "Religious Places", link: "/" },
+    { name: "Maharashtra", link: "/" },
+    { name: "Punjab", link: "/" },
+    { name: "India Tour", link: "/" },
+    { name: "Gujarat", link: "/" },
+  ];
+
+  const services = [
+    { name: "Trekking Packages", link: "/trekking" },
+    { name: "Hill Station Tours", link: "/tours" },
+    { name: "Adventure Travel", link: "/adventure" },
+    { name: "Camping & Stays", link: "/camping" },
+    { name: "Custom Trip Planning", link: "/custom-trip" },
+  ];
+
+  const contactInfo = [
+    { icon: FaMapMarkerAlt, text: "Jaipur, Rajasthan, India" },
+    { icon: FaPhoneAlt, text: "+91 73070 22824", link: "tel:+917307022824" },
+    { icon: FaEnvelope, text: "support@yatrakarotravels.com", link: "mailto:support@yatrakarotravels.com" },
+  ];
+
   return (
-    <footer className="bg-gradient-to-r from-blue-700 to-indigo-800 text-white">
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="relative bg-black text-gray-200 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-5 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-10 relative z-10">
+        
+        {/* ABOUT SECTION */}
         <div>
-          <h2 className="text-2xl font-serif font-bold">TravelMate</h2>
-          <p className="mt-3 text-gray-200 text-sm">
-            Discover the world with curated packages, 
-            seamless travel experiences, and memories for life. 🌍
+          <img
+            src="/PYT.png"
+            alt="Logo"
+            className="inline-block mr-2 w-16 h-16 mb-8"
+          />
+          {/* <h2 className="text-sm font-bold text-orange-400 mb-4">ParvatYatra</h2> */}
+          <p className="mb-4 leading-[25px] opacity-90">
+            ParvatYatra is your trusted travel companion for unforgettable
+            mountain adventures. We craft scenic journeys across India’s
+            majestic hills, offering trekking expeditions, serene retreats,
+            camping under starlit skies, and personalized adventure tours.
           </p>
+          <p className="mb-4 leading-relaxed opacity-90"> 
+            With expert guides, comfortable accommodations, and well-planned
+            itineraries, we ensure every trip is seamless, safe, and truly
+            memorable—helping you explore, connect with nature, and create
+            lifelong memories.
+          </p>
+
+          {/* Social Icons */}
+          <div className="flex space-x-3">
+            {socialLinks.map(({ icon: Icon, url }) => (
+              <a
+                key={url}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full text-white transition-transform hover:-translate-y-1 hover:bg-sky-500"
+              >
+                <Icon />
+              </a>
+            ))}
+          </div>
         </div>
+
+        {/* QUICK LINKS */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
-          <ul className="space-y-2 text-gray-200">
-            <li><a href="/" className="hover:text-yellow-300">Home</a></li>
-            <li><a href="/destinations" className="hover:text-yellow-300">Destinations</a></li>
-            <li><a href="/about" className="hover:text-yellow-300">About Us</a></li>
-            <li><a href="/contact" className="hover:text-yellow-300">Contact</a></li>
+          <h3 className="text-xl text-orange-400 mb-6 border-b-2 border-white pb-2">
+            Quick Links
+          </h3>
+          <ul className="space-y-2 pb-10">
+            {quickLinks.map((item) => (
+              <li key={item.name}>
+                <Link
+                  href={item.link}
+                  className="flex items-center gap-2 opacity-90 hover:opacity-100 hover:translate-x-1 transition"
+                >
+                  <FaChevronRight className="text-white" />
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <h3 className="text-xl text-orange-400 mb-6 border-b-2 border-white pb-2">
+            Our Destinations
+          </h3>
+          <ul className="space-y-2">
+            {OurDestinitions.map((item) => (
+              <li key={item.name}>
+                <Link
+                  href={item.link}
+                  className="flex items-center gap-2 opacity-90 hover:opacity-100 hover:translate-x-1 transition"
+                >
+                  <FaChevronRight className="text-white" />
+                  {item.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
+
+        {/* SERVICES */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Newsletter</h3>
-          <p className="text-gray-200 text-sm mb-3">
-            Subscribe to get travel updates & exclusive offers.
+          <h3 className="text-xl text-orange-400 mb-6 border-b-2 border-white pb-2">
+            Our Services
+          </h3>
+          <ul className="space-y-2">
+            {services.map((service) => (
+              <li key={service.name}>
+                <Link
+                  href={service.link}
+                  className="flex items-center gap-2 opacity-90 hover:opacity-100 hover:translate-x-1 transition"
+                >
+                  <FaChevronRight className="text-white-400" />
+                  {service.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* CONTACT + NEWSLETTER */}
+        <div>
+          <h3 className="text-xl text-orange-400 mb-6 border-b-2 border-white pb-2">
+            Contact Us
+          </h3>
+          <ul className="space-y-4 mb-6">
+            {contactInfo.map(({ icon: Icon, text, link }) => (
+              <li key={text} className="flex items-start gap-4">
+                <Icon className="text-white mt-1" />
+                {link ? (
+                  <a
+                    href={link}
+                    className="hover:underline opacity-90 hover:opacity-100"
+                  >
+                    {text}
+                  </a>
+                ) : (
+                  <div>{text}</div>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          {/* Newsletter */}
+          <h3 className="text-xl text-orange-400 mb-2 border-b-2 border-white pb-2">
+            Newsletter
+          </h3>
+          <p className="mb-4 opacity-70">
+            Subscribe to receive travel updates and exclusive offers.
           </p>
-          <form className="flex items-center bg-white rounded-lg overflow-hidden">
+          <form className="flex">
             <input
               type="email"
-              placeholder="Your email"
-              className="flex-1 p-2 text-black outline-none"
+              placeholder="Your Email"
+              required
+              className="flex-1 p-3 rounded-l-md focus:outline-none bg-gray-100 text-black"
             />
-            <button className="px-4 py-2 bg-yellow-400 text-black font-semibold hover:bg-yellow-300">
-              Join
+            <button
+              type="submit"
+              className="bg-orange-500 hover:bg-sky-400 text-white p-3 rounded-r-md transition"
+            >
+              <FaPaperPlane />
             </button>
           </form>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
-          <div className="flex gap-4 text-xl">
-            <a href="#" className="hover:text-yellow-300"><FaFacebookF /></a>
-            <a href="#" className="hover:text-yellow-300"><FaInstagram /></a>
-            <a href="#" className="hover:text-yellow-300"><FaTwitter /></a>
-            <a href="#" className="hover:text-yellow-300"><FaYoutube /></a>
-          </div>
-        </div>
       </div>
-      <div className="border-t border-gray-600 text-center py-4 text-gray-200 text-sm">
-        © {new Date().getFullYear()} TravelMate. All rights reserved.
+
+      {/* FOOTER BOTTOM */}
+      <div className="mt-16 pt-8 border-t border-gray-700 text-center opacity-70 text-sm">
+        <p>
+          © 2024 ParvatYatra Travel Agency. All Rights Reserved. | Designed with{" "}
+          <FaHeart className="inline text-sky-400" /> by ParvatYatra Development Team
+        </p>
       </div>
     </footer>
   );
