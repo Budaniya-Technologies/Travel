@@ -28,7 +28,6 @@ const faqData = [
   },
 ];
 
-
 export default function FaqSection() {
   const [openId, setOpenId] = useState(null);
 
@@ -43,11 +42,11 @@ export default function FaqSection() {
         {/* Header */}
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl text-white">
-            ParvatYatra FAQs
+            YatraKaro FAQs
           </h2>
           <p className="max-w-xl mx-auto mt-4 text-gray-300">
-            Your journey to the mountains begins here. Find answers to common
-            questions before you explore with us.
+            Travel smarter with YatraKaro. Find answers to common questions
+            before planning your next journey with us.
           </p>
         </div>
 
@@ -102,7 +101,7 @@ export default function FaqSection() {
             href="/contact"
             className="font-medium text-cyan-400 hover:underline"
           >
-            Contact ParvatYatra Support
+            Contact YatraKaro Support
           </a>
         </p>
       </div>
