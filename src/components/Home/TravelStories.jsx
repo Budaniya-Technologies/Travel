@@ -1,117 +1,147 @@
+// components/TravelStories.jsx
 "use client";
 
-import React from "react";
-import Slider from "react-slick";
-import Image from "next/image";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { motion } from "framer-motion";
 
-const stories = [
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+const teamData = [
   {
     id: 1,
-    title: "Exploring the Swiss Alps",
-    desc: "A breathtaking journey through snow-capped mountains.",
-    img: "/slider.png",
+    name: "Honymoon trips",
+    role: "Trevel with Your Love",
+    img: "https://i.pinimg.com/1200x/fe/a2/f6/fea2f6e5a464b0fa11529eb28ccfa698.jpg",
+    discription:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?",
   },
   {
     id: 2,
-    title: "Romantic Paris Getaway",
-    desc: "Discover love in the city of lights and culture.",
-    img: "/slider1.png",
+    name: "Family Trps",
+    role: "Trevel with Your Family",
+    img: "https://i.pinimg.com/736x/d6/17/54/d617543e81c95aff42d5e2801b39cabf.jpg",
+    discription:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?",
   },
   {
     id: 3,
-    title: "Desert Adventures in Dubai",
-    desc: "Experience luxury and thrill in the golden sands.",
-    img: "/slider2.jpg",
+    name: "Solo Trip",
+    role: "Trevel In Peace",
+    img: "https://i.pinimg.com/736x/20/ef/9d/20ef9d6ce8c29353a2e76a6d90c2a5f2.jpg",
+    discription:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?",
   },
   {
     id: 4,
-    title: "Peaceful Bali Retreat",
-    desc: "Reconnect with nature and inner peace in Bali.",
-    img: "/slider3.png",
-  },
-  {
-    id: 5,
-    title: "New York City Lights",
-    desc: "The bustling life of the city that never sleeps.",
-    img: "/slider4.webp",
+    name: "Groups Trips",
+    role: "Trevel In Bus",
+    img: "https://i.pinimg.com/736x/e9/6b/bd/e96bbd51a3d2f0a76cbba7260576cb7b.jpg",
+    discription:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?",
   },
 ];
 
-const TravelStories = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 600,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: false, // hides default arrows for mobile-friendly design
-    responsive: [
-      {
-        breakpoint: 1280,
-        settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 2 },
-      },
-      {
-        breakpoint: 480,
-        settings: { slidesToShow: 1 },
-      },
-    ],
-  };
+// Framer Motion animation for cards
+const cardAnimation = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
+export default function TravelStories() {
   return (
-    <section className="py-12 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Title */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-blue-600 mb-10">
-          Our Latest Travel Stories
-        </h2>
+    <section className="bg-white py-7 px-6">
+      <div className="max-w-7xl mx-auto text-center mb-5">
+        <h1 className="text-3xl md:text-4xl font-bold text-orange-600">
+          Personalize Packages
+        </h1>
+        <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis
+          perferendis hic asperiores quibusdam.
+        </p>
+      </div>
 
-        {/* Slider */}
-        <Slider {...settings}>
-          {stories.map((story) => (
-            <div key={story.id} className="px-2 sm:px-3">
-              <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
-                
-                {/* Image */}
-                <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-80">
-                  <Image
-                    src={story.img}
-                    alt={story.title}
-                    fill
-                    className="object-cover rounded-t-2xl"
+      <div className="max-w-7xl mx-auto flex items-center gap-4">
+        {/* Left Arrow */}
+        <button className="swiper-button-prev-custom bg-gray-500 p-3 rounded-full shadow-md">
+          ◀
+        </button>
+
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={20}
+          slidesPerView={1}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          navigation={{
+            nextEl: ".swiper-button-next-custom",
+            prevEl: ".swiper-button-prev-custom",
+          }}
+          pagination={{ clickable: true }}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          className="w-full"
+        >
+          {teamData.map((member) => (
+            <SwiperSlide key={member.id}>
+              <motion.div
+                variants={cardAnimation}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                <Link
+                  href="#"
+                  className="group relative block bg-black rounded-lg overflow-hidden w-full h-[250px]"
+                >
+                  <img
+                    src={member.img}
+                    alt={member.name}
+                    className="absolute inset-0 h-[250px] w-full rounded-lg object-cover opacity-75 transition-opacity group-hover:opacity-50"
                   />
-                </div>
 
-                {/* Content */}
-                <div className="p-4 sm:p-5 md:p-6">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800">
-                    {story.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-gray-600 mt-2">
-                    {story.desc}
-                  </p>
-                  <button className="mt-4 px-5 py-2 sm:py-3 text-sm sm:text-base bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-xl shadow hover:opacity-90 transition">
-                    Read More
-                  </button>
-                </div>
-              </div>
-            </div>
+                  <div className="relative p-4 sm:p-6 lg:p-8 h-full flex flex-col justify-between">
+                    <div>
+                      <p className="text-sm font-medium tracking-widest text-pink-500 uppercase">
+                        {member.role}
+                      </p>
+                      <p className="text-xl font-bold text-white sm:text-2xl">
+                        {member.name}
+                      </p>
+                    </div>
+
+                    <div className="mt-0 sm:mt-0 lg:mt-10">
+                      <div className="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                        <p className="text-sm text-white leading-[15px]">
+                          {member.discription}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            </SwiperSlide>
           ))}
-        </Slider>
+        </Swiper>
+
+        {/* Right Arrow */}
+        <button className="swiper-button-next-custom bg-gray-500 p-3 rounded-full shadow-md">
+          ▶
+        </button>
       </div>
     </section>
   );
-};
-
-export default TravelStories;
+}
