@@ -5,6 +5,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { apiGet } from "../../../Utils/http";
+import Link from "next/link";
+
+const getAllPackage = `apiUser/v1/frontend/getAllPackage?websiteId=${process.env.NEXT_PUBLIC_WEBSITE_ID}`;
 
 /* ========== NEW: BACKGROUND IMAGES ARRAY (MAPPING OBJECT) ========== */
 const backgroundImages = [
@@ -22,64 +26,82 @@ const backgroundImages = [
   },
 ];
 
-const travelPackages = [
-  {
-    id: 1,
-    title: "Romantic Paris Getaway",
-    image: "/slider1.png",
-    description: "Explore the city of love with guided tours and fine dining.",
-    location: "Paris, France",
-    duration: "7 Days / 6 Nights",
-    amount: "1,499",
-  },
-  {
-    id: 2,
-    title: "Adventure in the Alps",
-    image: "/slider2.jpg",
-    description: "Experience thrilling hikes, skiing, and breathtaking views.",
-    location: "Swiss Alps, Switzerland",
-    duration: "10 Days / 9 Nights",
-    amount: "2,299",
-  },
-  {
-    id: 3,
-    title: "Tropical Bali Escape",
-    image: "/slider3.png",
-    description: "Relax on pristine beaches and enjoy Bali's rich culture.",
-    location: "Bali, Indonesia",
-    duration: "6 Days / 5 Nights",
-    amount: "999",
-  },
-  {
-    id: 4,
-    title: "Safari in Kenya",
-    image: "/slider4.webp",
-    description: "Witness the Big Five on an unforgettable African safari.",
-    location: "Maasai Mara, Kenya",
-    duration: "8 Days / 7 Nights",
-    amount: "1,899",
-  },
-  {
-    id: 5,
-    title: "Discover Japan",
-    image: "/slider.png",
-    description: "Explore temples, cherry blossoms, and modern Tokyo life.",
-    location: "Tokyo, Kyoto, Japan",
-    duration: "12 Days / 11 Nights",
-    amount: "2,799",
-  },
-];
+// const travelPackages = [
+//   {
+//     id: 1,
+//     title: "Romantic Paris Getaway",
+//     image: "/slider1.png",
+//     description: "Explore the city of love with guided tours and fine dining.",
+//     location: "Paris, France",
+//     duration: "7 Days / 6 Nights",
+//     amount: "1,499",
+//   },
+//   {
+//     id: 2,
+//     title: "Adventure in the Alps",
+//     image: "/slider2.jpg",
+//     description: "Experience thrilling hikes, skiing, and breathtaking views.",
+//     location: "Swiss Alps, Switzerland",
+//     duration: "10 Days / 9 Nights",
+//     amount: "2,299",
+//   },
+//   {
+//     id: 3,
+//     title: "Tropical Bali Escape",
+//     image: "/slider3.png",
+//     description: "Relax on pristine beaches and enjoy Bali's rich culture.",
+//     location: "Bali, Indonesia",
+//     duration: "6 Days / 5 Nights",
+//     amount: "999",
+//   },
+//   {
+//     id: 4,
+//     title: "Safari in Kenya",
+//     image: "/slider4.webp",
+//     description: "Witness the Big Five on an unforgettable African safari.",
+//     location: "Maasai Mara, Kenya",
+//     duration: "8 Days / 7 Nights",
+//     amount: "1,899",
+//   },
+//   {
+//     id: 5,
+//     title: "Discover Japan",
+//     image: "/slider.png",
+//     description: "Explore temples, cherry blossoms, and modern Tokyo life.",
+//     location: "Tokyo, Kyoto, Japan",
+//     duration: "12 Days / 11 Nights",
+//     amount: "2,799",
+//   },
+// ];
 
 const FeaturedProgram = () => {
   const swiperRef = useRef(null);
 
   /* ========== AUTO BACKGROUND CHANGE LOGIC ========== */
   const [bgIndex, setBgIndex] = useState(0);
+  const [packageData, setPackageData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    apiGet(getAllPackage)
+      .then((response) => {
+        if (response?.status === 200 && Array.isArray(response?.data?.data)) {
+          setPackageData(response.data.data);
+        } else {
+          setError("No packages available.");
+        }
+      })
+      .catch(() => {
+        setError("Failed to load packages.");
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setBgIndex((prev) =>
-        prev === backgroundImages.length - 1 ? 0 : prev + 1
+        prev === backgroundImages.length - 1 ? 0 : prev + 1,
       );
     }, 4000); // change every 4 seconds
 
@@ -119,9 +141,11 @@ const FeaturedProgram = () => {
             </p>
 
             <div className="flex gap-4 mt-4">
-              <button className="px-6 py-3 bg-cyan-500 text-black font-semibold rounded-full hover:bg-cyan-400 transition">
-                View All Packages
-              </button>
+              <Link href="/all-packages">
+                <button className="px-6 py-3 bg-cyan-500 text-black font-semibold rounded-full hover:bg-cyan-400 transition">
+                  View All Packages
+                </button>
+              </Link>
               <button className="px-6 py-3 border border-white text-white rounded-full hover:bg-white hover:text-black transition">
                 Enquire Now
               </button>
@@ -157,7 +181,7 @@ const FeaturedProgram = () => {
                 1024: { slidesPerView: 2 },
               }}
             >
-              {travelPackages.map((pkg) => (
+              {packageData.map((pkg) => (
                 <SwiperSlide key={pkg.id}>
                   <div className="bg-white/90 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 transition">
                     <div className="relative h-60">
@@ -173,20 +197,16 @@ const FeaturedProgram = () => {
                     </div>
 
                     <div className="p-5 space-y-2">
-                      <p className="text-gray-600 text-sm">
-                        {pkg.description}
-                      </p>
+                      <p className="text-gray-600 text-sm">{pkg.description}</p>
 
                       <p className="text-blue-700 font-medium">
-                        📍 {pkg.location}
+                        📍 {pkg.pickUpPoint} - {pkg.dropPoint}
                       </p>
 
-                      <p className="text-gray-500 text-sm">
-                        ⏳ {pkg.duration}
-                      </p>
+                      <p className="text-gray-500 text-sm">⏳ {pkg.duration}</p>
 
                       <p className="text-lg font-bold text-green-600">
-                        ₹{pkg.amount}
+                        ₹ {pkg.price}
                       </p>
 
                       <div className="flex gap-3 mt-3">
