@@ -79,7 +79,7 @@ export default function PackageDetails() {
           
           {/* LEFT CONTENT */}
           <div className="p-8">
-            <h2 className="text-2xl font-bold mb-4">Package Details</h2>
+            <h2 className="text-2xl text-gray-900 font-bold mb-4">Package Details</h2>
 
             <ul className="space-y-3 text-gray-700">
               <li>📍 <b>Route:</b> {pkg.pickUpPoint} → {pkg.dropPoint}</li>
@@ -98,7 +98,7 @@ export default function PackageDetails() {
             {/* HTML Content */}
             {pkg.slugContent && (
               <div className="mt-6">
-                <h3 className="text-xl font-semibold mb-2">
+                <h3 className="text-xl text-gray-900 font-semibold mb-2">
                   About this package
                 </h3>
 
