@@ -80,7 +80,7 @@ const travelEssentials = [
 
 export default function TravelHero() {
   return (
-    <section className="relative text-white overflow-hidden font-sans">
+    <section className="relative text-white overflow-hidden font-sans md:max-h-screen">
       <Swiper
         modules={[Autoplay]}
         loop={true}
