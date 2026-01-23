@@ -1,12 +1,12 @@
-import AllPackage from '@/components/Package/AllPackage'
-import HeroSection from '@/components/Package/Hero'
+// import AllPackage from '@/components/Package/AllPackage'
+// import HeroSection from '@/components/Package/Hero'
 import React from 'react'
 
 function page() {
   return (
     <div>
-      <HeroSection/>
-      <AllPackage/>
+      {/* <HeroSection/>
+      <AllPackage/> */}
     </div>
   )
 }
