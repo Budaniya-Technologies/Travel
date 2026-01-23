@@ -49,12 +49,13 @@ export default function Header() {
     { name: "Activities", href: "/activities" },
     { name: "Blogs", href: "/blog" },
     { name: "Contact", href: "/contact" },
+    { name: "Login", href: "/login" },
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md py-3" : "bg-transparent py-5"
+        isScrolled ? "bg-white shadow-md py-3" : "bg-black/10 py-5"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 flex justify-between items-center">
