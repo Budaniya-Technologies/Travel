@@ -214,9 +214,11 @@ const FeaturedProgram = () => {
                           Book Now
                         </button>
 
-                        <button className="flex-1 border border-indigo-600 text-indigo-600 py-2 rounded-lg hover:bg-indigo-600 hover:text-white">
-                          Details
-                        </button>
+                        <Link href={`/all-packages/${pkg.slug}`}>
+                          <button className="flex-1 border border-indigo-600 text-indigo-600 py-2 rounded-lg hover:bg-indigo-600 hover:text-white">
+                            Details
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
