@@ -146,9 +146,11 @@ const FeaturedProgram = () => {
                   View All Packages
                 </button>
               </Link>
+              <Link href="/contact">
               <button className="px-6 py-3 border border-white text-white rounded-full hover:bg-white hover:text-black transition">
                 Enquire Now
               </button>
+              </Link>
             </div>
           </div>
 

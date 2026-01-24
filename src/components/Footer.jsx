@@ -62,13 +62,13 @@ export default function Footer() {
             className="inline-block mr-2 w-16 h-16 mb-8"
           />
           {/* <h2 className="text-sm font-bold text-orange-400 mb-4">ParvatYatra</h2> */}
-          <p className="mb-4 leading-[25px] opacity-90">
+          <p className="mb-4 leading-[22px] text-sm opacity-90">
             ParvatYatra is your trusted travel companion for unforgettable
             mountain adventures. We craft scenic journeys across India’s
             majestic hills, offering trekking expeditions, serene retreats,
             camping under starlit skies, and personalized adventure tours.
           </p>
-          <p className="mb-4 leading-relaxed opacity-90"> 
+          <p className="mb-4 leading-[22px] text-sm opacity-90"> 
             With expert guides, comfortable accommodations, and well-planned
             itineraries, we ensure every trip is seamless, safe, and truly
             memorable—helping you explore, connect with nature, and create
@@ -96,7 +96,7 @@ export default function Footer() {
           <h3 className="text-xl text-orange-400 mb-6 border-b-2 border-white pb-2">
             Quick Links
           </h3>
-          <ul className="space-y-2 pb-10">
+          <ul className="space-y-1 pb-10 text-sm">
             {quickLinks.map((item) => (
               <li key={item.name}>
                 <Link
@@ -113,7 +113,7 @@ export default function Footer() {
           <h3 className="text-xl text-orange-400 mb-6 border-b-2 border-white pb-2">
             Our Destinations
           </h3>
-          <ul className="space-y-2">
+          <ul className="space-y-1 text-sm">
             {OurDestinitions.map((item) => (
               <li key={item.name}>
                 <Link
@@ -133,7 +133,7 @@ export default function Footer() {
           <h3 className="text-xl text-orange-400 mb-6 border-b-2 border-white pb-2">
             Our Services
           </h3>
-          <ul className="space-y-2">
+          <ul className="space-y-1 text-sm">
             {services.map((service) => (
               <li key={service.name}>
                 <Link
@@ -153,7 +153,7 @@ export default function Footer() {
           <h3 className="text-xl text-orange-400 mb-6 border-b-2 border-white pb-2">
             Contact Us
           </h3>
-          <ul className="space-y-4 mb-6">
+          <ul className="space-y-1 text-sm mb-6">
             {contactInfo.map(({ icon: Icon, text, link }) => (
               <li key={text} className="flex items-start gap-4">
                 <Icon className="text-white mt-1" />
@@ -175,7 +175,7 @@ export default function Footer() {
           <h3 className="text-xl text-orange-400 mb-2 border-b-2 border-white pb-2">
             Newsletter
           </h3>
-          <p className="mb-4 opacity-70">
+          <p className="mb-4 opacity-70  text-sm">
             Subscribe to receive travel updates and exclusive offers.
           </p>
           <form className="flex">

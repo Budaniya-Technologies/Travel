@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const PopularPlaces = () => {
   const scrollRef = useRef(null);
@@ -88,9 +89,11 @@ const PopularPlaces = () => {
           </h2>
 
           <div className="flex flex-wrap gap-3 pt-2">
+            <Link href="/all-packages">
             <button className="px-5 py-2 rounded-full bg-red-500 text-white text-sm font-semibold hover:bg-red-600 transition">
               View All 
             </button>
+            </Link>
           </div>
 
           <p className="text-gray-600 text-base md:text-lg max-w-md">

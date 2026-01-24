@@ -2,8 +2,10 @@
 
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/effect-fade";
+import Link from "next/link";
 
 const slides = [
   {
@@ -27,104 +29,68 @@ const slides = [
     highlight: "New Places",
     bg: "https://i.pinimg.com/736x/6d/b6/82/6db6823b78ce179383aed77e0de29dd5.jpg",
   },
-   {
+  {
     id: 4,
-    badge: "✈️ Seamless Travel Solutions",
-    title: "Discover",
-    highlight: "New Places",
+    badge: "🏔️ Nature & Serenity",
+    title: "Feel",
+    highlight: "The Escape",
     bg: "https://i.pinimg.com/736x/23/bc/01/23bc0131b8ae332e29be3b06570c1d8d.jpg",
-  },
-];
-
-const travelEssentials = [
-  {
-    id: 1,
-    text: "Curated Global Destinations",
-    color: "text-blue-400",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-      />
-    ),
-  },
-  {
-    id: 2,
-    text: "24/7 Concierge Support",
-    color: "text-amber-400",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
-      />
-    ),
-  },
-  {
-    id: 3,
-    text: "Seamless Logistics & Visas",
-    color: "text-emerald-400",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-      />
-    ),
   },
 ];
 
 export default function TravelHero() {
   return (
-    <section className="relative text-white overflow-hidden font-sans md:max-h-screen">
+    <section className="relative w-full overflow-hidden text-white">
       <Swiper
-        modules={[Autoplay]}
-        loop={true}
-        autoplay={{ delay: 6000, disableOnInteraction: false }}
-        speed={1200}
+        modules={[Autoplay, EffectFade]}
+        effect="fade"
+        loop
+        speed={1400}
+        autoplay={{ delay: 6500, disableOnInteraction: false }}
         className="w-full"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
             {/* Background */}
             <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105"
-              style={{ backgroundImage: `url('${slide.bg}')` }}
+              className="absolute inset-0 bg-cover bg-center scale-110 transition-transform duration-[4000ms]"
+              style={{ backgroundImage: `url(${slide.bg})` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/10" />
             </div>
 
-            <div className="container mx-auto lg:px-12 px-5 py-24 md:py-32 relative z-10 lg:min-h-[90vh] flex items-center">
-              <div className="flex flex-col md:flex-row items-center justify-between w-full">
-                {/* LEFT CONTENT */}
-                <div className="w-full md:w-1/2 mb-12 md:mb-0">
-                  <span className="inline-block py-1 px-3 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm">
+            {/* Content */}
+            <div className="relative z-10 min-h-screen flex items-center">
+              <div className="container mx-auto px-6 lg:px-12">
+                <div className="max-w-2xl">
+                  {/* Badge */}
+                  <span className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-sm font-medium text-white">
                     {slide.badge}
                   </span>
 
-                  <h1 className="text-6xl md:text-6xl font-extrabold mb-6 leading-[50px] tracking-tight">
-                    {slide.title}
-                    <br />
-                    <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 inline-block text-transparent bg-clip-text">
+                  {/* Heading */}
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6">
+                    {slide.title} <br />
+                    <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent">
                       {slide.highlight}
                     </span>
                   </h1>
 
-                  <p className="text-xl mb-3 text-gray-200 max-w-lg leading-[30px]">
-                    Crafting unforgettable journeys with tailor-made itineraries,
-                    expert local guides, and premium travel essentials.
+                  {/* Description */}
+                  <p className="text-lg sm:text-xl text-gray-200 max-w-xl mb-10 leading-relaxed">
+                    Craft unforgettable journeys with curated destinations,
+                    premium experiences, and seamless travel planning — all in
+                    one place.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <button className="group relative w-full sm:w-auto px-8 py-4 overflow-hidden rounded-full bg-blue-600 font-bold transition-all hover:bg-blue-500 active:scale-95">
-                      <span className="relative z-10 flex items-center justify-center gap-2">
+                  {/* Actions */}
+                  <div className="flex flex-wrap items-center gap-4">
+                    <button className="group relative px-8 py-4 rounded-full bg-blue-600 font-semibold transition-all hover:bg-blue-500 active:scale-95">
+                      <Link href="/contact">
+                      <span className="flex items-center gap-2">
                         Plan My Trip
                         <svg
-                          className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                          className="w-5 h-5 transition-transform group-hover:translate-x-1"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -137,55 +103,15 @@ export default function TravelHero() {
                           />
                         </svg>
                       </span>
+                      </Link>
+                      
                     </button>
 
-                    <button className="px-8 py-4 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-white font-semibold hover:bg-white/20 transition-all">
-                      View Packages
-                    </button>
-                  </div>
-                </div>
-
-                {/* RIGHT CARD */}
-                <div className="w-full md:w-[400px]">
-                  <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-                    <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-                      Travel Essentials
-                      <span className="h-1 w-12 bg-blue-500 rounded-full"></span>
-                    </h2>
-
-                    <ul className="space-y-8">
-                      {travelEssentials.map((item) => (
-                        <li key={item.id} className="flex items-start group">
-                          <div
-                            className={`p-3 rounded-2xl bg-white/5 mr-4 group-hover:scale-110 transition-transform duration-300 ${item.color}`}
-                          >
-                            <svg
-                              className="w-6 h-6"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              {item.icon}
-                            </svg>
-                          </div>
-
-                          <div>
-                            <span className="block text-lg font-medium text-white group-hover:text-blue-300 transition-colors">
-                              {item.text}
-                            </span>
-                            <p className="text-sm text-gray-400 mt-1">
-                              Experience hassle-free exploration.
-                            </p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="mt-8 pt-8 border-t border-white/10">
-                      <p className="text-xs text-gray-400 uppercase tracking-widest text-center font-bold">
-                        Trusted by 10k+ Travelers
-                      </p>
-                    </div>
+                    <Link href="/all-packages">
+                      <button className="px-8 py-4 rounded-full border border-white/30 bg-white/10 backdrop-blur-md font-medium transition hover:bg-white/20">
+                        View Packages
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -194,16 +120,15 @@ export default function TravelHero() {
         ))}
       </Swiper>
 
-      {/* Bottom Wave */}
-      <div className="absolute bottom-0 left-0 right-0 leading-none">
+      {/* Bottom Shape */}
+      <div className="absolute bottom-0 left-0 right-0">
         <svg
-          className="w-full h-[100px]"
-          preserveAspectRatio="none"
           viewBox="0 0 1440 120"
-          fill="none"
+          className="w-full h-[110px]"
+          preserveAspectRatio="none"
         >
           <path
-            d="M0 120L1440 120V0C1440 0 1140 120 720 120C300 120 0 0 0 0V120Z"
+            d="M0 120H1440V0C1440 0 1140 120 720 120C300 120 0 0 0 0V120Z"
             fill="white"
           />
         </svg>
