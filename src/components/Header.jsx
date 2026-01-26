@@ -35,7 +35,7 @@ export default function Header() {
       ],
     },
     {
-      name: "Package",
+      name: "Plans",
       href: "/",
       dropdown: [
         { name: "Honeymoon", href: "/" },
@@ -44,9 +44,8 @@ export default function Header() {
         { name: "Solo Trips", href: "/" },
       ],
     },
-    // { name: "Hotels", href: "/hotels" },
-    // { name: "Cruises", href: "/cruises" },
-    // { name: "Activities", href: "/activities" },
+   
+    { name: "Packages", href: "/all-packages" },
     { name: "Blogs", href: "/blog" },
     { name: "Contact", href: "/contact" },
     { name: "Login", href: "/login" },
