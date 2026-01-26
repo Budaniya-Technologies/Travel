@@ -26,54 +26,6 @@ const backgroundImages = [
   },
 ];
 
-// const travelPackages = [
-//   {
-//     id: 1,
-//     title: "Romantic Paris Getaway",
-//     image: "/slider1.png",
-//     description: "Explore the city of love with guided tours and fine dining.",
-//     location: "Paris, France",
-//     duration: "7 Days / 6 Nights",
-//     amount: "1,499",
-//   },
-//   {
-//     id: 2,
-//     title: "Adventure in the Alps",
-//     image: "/slider2.jpg",
-//     description: "Experience thrilling hikes, skiing, and breathtaking views.",
-//     location: "Swiss Alps, Switzerland",
-//     duration: "10 Days / 9 Nights",
-//     amount: "2,299",
-//   },
-//   {
-//     id: 3,
-//     title: "Tropical Bali Escape",
-//     image: "/slider3.png",
-//     description: "Relax on pristine beaches and enjoy Bali's rich culture.",
-//     location: "Bali, Indonesia",
-//     duration: "6 Days / 5 Nights",
-//     amount: "999",
-//   },
-//   {
-//     id: 4,
-//     title: "Safari in Kenya",
-//     image: "/slider4.webp",
-//     description: "Witness the Big Five on an unforgettable African safari.",
-//     location: "Maasai Mara, Kenya",
-//     duration: "8 Days / 7 Nights",
-//     amount: "1,899",
-//   },
-//   {
-//     id: 5,
-//     title: "Discover Japan",
-//     image: "/slider.png",
-//     description: "Explore temples, cherry blossoms, and modern Tokyo life.",
-//     location: "Tokyo, Kyoto, Japan",
-//     duration: "12 Days / 11 Nights",
-//     amount: "2,799",
-//   },
-// ];
-
 const FeaturedProgram = () => {
   const swiperRef = useRef(null);
 
@@ -120,7 +72,8 @@ const FeaturedProgram = () => {
       }}
     >
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/60"></div>
+ <div className="absolute inset-0 bg-black/60 pointer-events-none"></div>
+
 
       <div className="relative max-w-[1440px] mx-auto px-6 md:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -147,28 +100,28 @@ const FeaturedProgram = () => {
                 </button>
               </Link>
               <Link href="/contact">
-              <button className="px-6 py-3 border border-white text-white rounded-full hover:bg-white hover:text-black transition">
-                Enquire Now
-              </button>
+                <button className="px-6 py-3 border border-white text-white rounded-full hover:bg-white hover:text-black transition">
+                  Enquire Now
+                </button>
               </Link>
             </div>
           </div>
 
           {/* RIGHT SIDE: SWIPER */}
           <div className="relative">
-            <button
+            {/* <button
               onClick={() => swiperRef.current?.slidePrev()}
               className="absolute -left-6 top-1/2 z-10 bg-white text-black p-3 rounded-full shadow-md"
             >
               <FaChevronLeft />
-            </button>
+            </button> */}
 
-            <button
+            {/* <button
               onClick={() => swiperRef.current?.slideNext()}
               className="absolute -right-6 top-1/2 z-10 bg-white text-black p-3 rounded-full shadow-md"
             >
               <FaChevronRight />
-            </button>
+            </button> */}
 
             <Swiper
               modules={[Pagination, Autoplay]}
@@ -199,7 +152,10 @@ const FeaturedProgram = () => {
                     </div>
 
                     <div className="p-5 space-y-2">
-                      <p className="text-gray-600 text-sm">{pkg.description}</p>
+                     <p className="text-gray-600 text-sm">
+                      {pkg.description?.split(" ").slice(0, 8).join(" ")}
+                      {pkg.description?.split(" ").length > 8 && "..."}
+                    </p>
 
                       <p className="text-blue-700 font-medium">
                         📍 {pkg.pickUpPoint} - {pkg.dropPoint}
@@ -212,12 +168,20 @@ const FeaturedProgram = () => {
                       </p>
 
                       <div className="flex gap-3 mt-3">
-                        <button className="flex-1 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">
-                          Book Now
-                        </button>
+                        <Link
+                          href={`/all-packages/${pkg.slug}`}
+                          className="flex-1"
+                        >
+                          <button className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">
+                            Book Now
+                          </button>
+                        </Link>
 
-                        <Link href={`/all-packages/${pkg.slug}`}>
-                          <button className="flex-1 border border-indigo-600 text-indigo-600 py-2 rounded-lg hover:bg-indigo-600 hover:text-white">
+                        <Link
+                          href={`/all-packages/${pkg.slug}`}
+                          className="flex-1"
+                        >
+                          <button className="w-full border border-indigo-600 text-indigo-600 py-2 rounded-lg hover:bg-indigo-600 hover:text-white">
                             Details
                           </button>
                         </Link>

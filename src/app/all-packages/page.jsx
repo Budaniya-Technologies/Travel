@@ -94,7 +94,7 @@ export default function AllPackage() {
             {packageData.map((pkg) => (
               <Link
                 key={pkg.slug}
-                href={`/package/${pkg.slug}`}
+                href={`/all-packages/${pkg.slug}`}
                 className="group"
               >
                 <div className="bg-white/90 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 transition">
@@ -111,7 +111,10 @@ export default function AllPackage() {
                   </div>
 
                   <div className="p-5 space-y-2">
-                    <p className="text-gray-600 text-sm">{pkg.description}</p>
+                    <p className="text-gray-600 text-sm">
+                      {pkg.description?.split(" ").slice(0, 8).join(" ")}
+                      {pkg.description?.split(" ").length > 8 && "..."}
+                    </p>
 
                     <p className="text-blue-700 font-medium">
                       📍 {pkg.pickUpPoint} - {pkg.dropPoint}
@@ -124,13 +127,22 @@ export default function AllPackage() {
                     </p>
 
                     <div className="flex gap-3 mt-3">
-                      <button className="flex-1 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">
-                        Book Now
-                      </button>
-                      <Link key={pkg.slug} href={`/all-packages/${pkg.slug}`}>
-                      <button className="flex-1 border border-indigo-600 text-indigo-600 py-2 rounded-lg hover:bg-indigo-600 hover:text-white">
-                        Details
-                      </button>
+                      <Link
+                        href={`/all-packages/${pkg.slug}`}
+                        className="flex-1"
+                      >
+                        <button className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">
+                          Book Now
+                        </button>
+                      </Link>
+
+                      <Link
+                        href={`/all-packages/${pkg.slug}`}
+                        className="flex-1"
+                      >
+                        <button className="w-full border border-indigo-600 text-indigo-600 py-2 rounded-lg hover:bg-indigo-600 hover:text-white">
+                          Details
+                        </button>
                       </Link>
                     </div>
                   </div>
