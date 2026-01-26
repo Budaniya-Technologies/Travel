@@ -57,7 +57,9 @@ export default function Header() {
   return (
     <nav className="w-full fixed top-0 left-0 z-50 shadow-lg bg-white font-sans">
       {/* --- TOP BAR (GREEN) --- */}
-      <div className="bg-[#00a400] text-white px-4 md:px-6 py-2 flex flex-wrap items-center justify-between gap-y-2">
+      <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-4 md:px-6 py-2 flex flex-wrap items-center justify-between gap-y-2">
+
+
         {/* Visible on both Mobile and Desktop now */}
         <div className="flex items-center gap-3">
           <span className="text-[10px] md:text-xs font-medium uppercase tracking-wider text-white/90">
@@ -286,7 +288,7 @@ export default function Header() {
               >
                 Contact
               </Link>
-              <div className="text-[#00a400] font-black text-xs uppercase tracking-widest mt-2">
+              <div className="text-[#DC143C] font-black text-xs uppercase tracking-widest mt-2">
                 Explore All Destinations
               </div>
             </div>
@@ -304,7 +306,7 @@ export default function Header() {
                         key={i}
                         href={opt.link}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="px-10 py-3 text-sm text-gray-600 border-b border-gray-50 last:border-none hover:bg-gray-50"
+                        className="px-10 py-3 text-sm text-black/90 border-b border-gray-50 last:border-none hover:bg-gray-50"
                       >
                         {opt.label}
                       </Link>
@@ -316,7 +318,7 @@ export default function Header() {
 
             <div className="p-6 flex flex-col gap-4">
               <Link href="/contact">
-              <button className="w-full bg-[#00a400] text-white py-4 rounded-xl font-bold shadow-lg">
+              <button className="w-full bg-[#DC143C] text-white py-4 rounded-xl font-bold shadow-lg">
                 BOOK A TRIP
               </button></Link>
               <div className="flex gap-4">
