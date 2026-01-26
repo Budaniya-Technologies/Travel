@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { FaCheckCircle } from "react-icons/fa";
 
@@ -80,17 +81,19 @@ const AboutUs = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center lg:justify-start">
+              <Link href="/all-packages">
               <button className="w-full rounded-full bg-slate-900 px-8 py-4 font-semibold text-white transition-all hover:bg-indigo-600 hover:shadow-lg active:scale-95 sm:w-auto">
                 Explore More
               </button>
-              <button className="flex items-center gap-2 font-bold text-slate-900 transition-colors hover:text-indigo-600">
+              </Link>
+              {/* <button className="flex items-center gap-2 font-bold text-slate-900 transition-colors hover:text-indigo-600">
                 <span>Watch Our Journey</span>
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200">
                     <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z"/>
                     </svg>
                 </div>
-              </button>
+              </button> */}
             </div>
           </div>
 

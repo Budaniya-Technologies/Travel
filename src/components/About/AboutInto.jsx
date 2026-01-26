@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 
 export default function AboutIntro() {
@@ -24,16 +25,16 @@ export default function AboutIntro() {
 
           {/* Right Image */}
           <div className="mt-12 md:mt-0">
-          <button
-  type="button"
-  className="px-8 py-4 rounded-full font-semibold text-white 
+            <Link href="/all-packages">"
+            <button
+              type="button"
+              className="px-8 py-4 rounded-full font-semibold text-white 
   bg-blue-600 hover:bg-blue-500 transition-all duration-300
   shadow-md hover:shadow-lg"
->
-  View All Popular Packages
-</button>
-
-
+            >
+              View All Popular Packages
+            </button>
+            </Link>
           </div>
         </div>
       </div>

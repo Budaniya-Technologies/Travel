@@ -98,12 +98,12 @@ const Vision = () => {
               </div>
 
               <div>
-                <Link
+                {/* <Link
                   href={item.link}
                   className="mt-1 inline-flex font-bold items-center bg-link text-gray-700 text-base rounded-lg py-1.5"
                 >
                   Read More
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

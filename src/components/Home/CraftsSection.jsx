@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
+import Link from "next/link";
 
 const travelData = [
   {
@@ -149,9 +150,11 @@ export default function CraftsSection() {
               Discover <span className="italic">Incredible India</span>
             </p>
           </div>
+          <Link href="/all-packages">
           <button className="hidden rounded-full border border-black-300 px-6 py-2 text-sm font-semibold transition-colors text-amber-900 hover:bg-slate-900 hover:text-white lg:block">
             View All Places
           </button>
+          </Link>
         </div>
 
         {/* Desktop Grid */}

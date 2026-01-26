@@ -1,109 +1,149 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 
-const sliderData = [
+import { useEffect, useState, useRef } from "react";
+
+const slides = [
   {
-    id: 1,
-    image: "https://i.pinimg.com/736x/a2/28/f8/a228f83feae12075606d08c8183b80c7.jpg",
-    title: "Hidden Gems of Europe",
-    description: "Explore the cobblestone streets and secret cafes that travel guides miss.",
+    title: "Water Diving At Goa",
+    description:
+      "Experience the thrill of scuba diving in Goa’s crystal-clear waters, exploring vibrant marine life and unforgettable underwater adventures.",
+    image:
+      "https://r4.wallpaperflare.com/wallpaper/617/792/1005/fish-landscape-the-ocean-stay-wallpaper-679fe2349f35ff7a7f820431b191e785.jpg",
   },
   {
-    id: 2,
-    image: "https://i.pinimg.com/1200x/a1/62/d0/a162d09c913b12ddef946e579a960735.jpg",
-    title: "Mountain Expeditions",
-    description: "From the Andes to the Himalayas, find your next high-altitude adventure.",
+    title: "Beautiful Architect of Jaipur",
+    description:
+      "Discover Jaipur’s royal architecture, where majestic forts, grand palaces, and rich heritage reflect the timeless beauty of Rajasthan.",
+    image:
+      "https://r4.wallpaperflare.com/wallpaper/484/985/153/jodhpur-rajasthan-india-wallpaper-8b16dced9341dfe925543b393d9c2c50.jpg",
   },
   {
-    id: 3,
-    image: "https://i.pinimg.com/1200x/91/8e/11/918e1192864b7e8907a0ec6ec789bd1d.jpg",
-    title: "Tropical Paradises",
-    description: "Relaxing retreats and turquoise waters await in our latest island guides.",
+    title: "Camel Ride At Jaisalmer",
+    description:
+      "Enjoy a magical camel ride across the golden Thar Desert, witnessing stunning sunsets and the cultural charm of Jaisalmer.",
+    image:
+      "https://r4.wallpaperflare.com/wallpaper/446/515/798/india-silhouette-camel-caravan-wallpaper-9940889d218addbb7607f83fe0b1c69d.jpg",
+  },
+  {
+    title: "Mountain Nature Escape",
+    description:
+      "Relax amidst serene mountains, flowing rivers, and lush greenery—perfect for nature lovers seeking peace and adventure.",
+    image:
+      "https://r4.wallpaperflare.com/wallpaper/537/664/855/nature-water-mountains-trees-wallpaper-4b69c27222a40f0cc99fe78e7d65fe3e.jpg",
   },
 ];
 
-const BlogHero = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-play logic
+export default function BlogHero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+  const intervalRef = useRef(null);
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev === sliderData.length - 1 ? 0 : prev + 1));
-    }, 5000); // Changes every 5 seconds
-    return () => clearInterval(timer);
-  }, []);
+    intervalRef.current = setInterval(() => {
+      if (autoplay) {
+        nextSlide();
+      }
+    }, 5000);
+
+    return () => clearInterval(intervalRef.current);
+  }, [autoplay, currentSlide]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const replaceBrokenImage = (e) => {
+    const fallbacks = [
+      "https://picsum.photos/id/1018/1920/1080",
+      "https://picsum.photos/id/1015/1920/1080",
+      "https://picsum.photos/id/1019/1920/1080",
+    ];
+    e.target.src = fallbacks[currentSlide % fallbacks.length];
+  };
 
   return (
-    <section className="relative w-full h-[80vh] overflow-hidden bg-gray-800">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          className="relative w-full h-full"
-        >
-          {/* Background Image */}
-          <Image
-            src={sliderData[currentIndex].image}
-            alt={sliderData[currentIndex].title}
-            fill
-            priority
-            className="object-cover"
-          />
-          
-          {/* Gradient Overlay for better contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
-          {/* Text Content */}
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6">
-            <motion.h1 
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-5xl md:text-7xl font-extrabold tracking-tight drop-shadow-2xl"
-            >
-              {sliderData[currentIndex].title}
-            </motion.h1>
-            
-            <motion.p 
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="mt-6 text-lg md:text-2xl max-w-3xl font-light text-gray-200 drop-shadow-md"
-            >
-              {sliderData[currentIndex].description}
-            </motion.p>
-
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="mt-8 px-8 py-3 bg-white text-black font-semibold rounded-full hover:bg-opacity-90 transition-all active:scale-95"
-            >
-              Read Stories
-            </motion.button>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Slider Dots Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-        {sliderData.map((_, index) => (
-          <button
+    <section
+      className="relative overflow-hidden"
+      onMouseEnter={() => setAutoplay(false)}
+      onMouseLeave={() => setAutoplay(true)}
+    >
+      <div className="relative h-[80vh] min-h-[500px]">
+        {slides.map((slide, index) => (
+          <div
             key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`h-2 transition-all duration-300 rounded-full ${
-              currentIndex === index ? "w-8 bg-white" : "w-2 bg-white/50"
+            className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+              currentSlide === index
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-105 pointer-events-none"
             }`}
-          />
+          >
+            {/* Background Image */}
+            <div className="absolute inset-0 bg-gray-900">
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover opacity-80"
+                onError={replaceBrokenImage}
+                loading="lazy"
+              />
+            </div>
+
+            {/* Content */}
+            <div className="container mx-auto px-6 h-full flex items-center relative z-10">
+              <div
+                className={`max-w-2xl text-white transition-all duration-700 delay-200 ${
+                  currentSlide === index
+                    ? "translate-x-0 opacity-100"
+                    : "translate-x-10 opacity-0"
+                }`}
+              >
+                <h2 className="text-4xl md:text-5xl font-bold mb-2">
+                  {slide.title}
+                </h2>
+                <p className="text-xl md:text-2xl mb-8">
+                  {slide.description}
+                </p>
+              </div>
+            </div>
+          </div>
         ))}
+
+        {/* Prev Button */}
+        {/* <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/10 hover:bg-black/70 text-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center z-20"
+        >
+          ❮
+        </button> */}
+
+        {/* Next Button */}
+        {/* <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/10 hover:bg-black/70 text-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center z-20"
+        >
+          ❯
+        </button> */}
+
+        {/* Dots */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`h-2 md:h-3 rounded-full transition-all ${
+                currentSlide === index
+                  ? "bg-white w-6"
+                  : "bg-white/50 w-3"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
-};
-
-export default BlogHero;
+}
