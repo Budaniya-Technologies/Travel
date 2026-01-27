@@ -138,7 +138,7 @@ export default function Header() {
               <span className="text-base md:text-lg font-bold text-gray-800 leading-none">
                 Yatra Karo
               </span>
-              <span className="text-[10px] md:text-xs font-medium text-green-600">
+              <span className="text-[10px] md:text-xs font-medium text-orange-600">
                 Travels
               </span>
             </div>
