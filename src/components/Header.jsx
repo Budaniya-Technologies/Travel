@@ -57,7 +57,7 @@ export default function Header() {
   return (
     <nav className="w-full fixed top-0 left-0 z-50 shadow-lg bg-white font-sans">
       {/* --- TOP BAR (GREEN) --- */}
-      <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-4 md:px-6 py-2 flex flex-wrap items-center justify-between gap-y-2">
+      <div className="bg-orange-600 text-white px-4 md:px-6 py-2 flex flex-wrap items-center justify-between gap-y-2">
 
 
         {/* Visible on both Mobile and Desktop now */}
@@ -148,25 +148,25 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-6 h-full">
             <Link
               href="/"
-              className="text-gray-700 hover:text-[#00a400] font-bold text-sm uppercase"
+              className="text-gray-700 hover:text-red-600 font-bold text-sm uppercase"
             >
               Home
             </Link>
             <Link
               href="/aboutus"
-              className="text-gray-700 hover:text-[#00a400] font-bold text-sm uppercase"
+              className="text-gray-700 hover:text-red-600 font-bold text-sm uppercase"
             >
               About US
             </Link>
             <Link
               href="/blog"
-              className="text-gray-700 hover:text-[#00a400] font-bold text-sm uppercase"
+              className="text-gray-700 hover:text-red-600 font-bold text-sm uppercase"
             >
               Blogs
             </Link>
              <Link
               href="/all-packages"
-              className="text-gray-700 hover:text-[#00a400] font-bold text-sm uppercase"
+              className="text-gray-700 hover:text-red-600 font-bold text-sm uppercase"
             >
               All Packages
             </Link>
@@ -177,7 +177,7 @@ export default function Header() {
               onMouseEnter={() => setIsMegaMenuOpen(true)}
               onMouseLeave={() => setIsMegaMenuOpen(false)}
             >
-              <span className="text-gray-700 group-hover:text-[#00a400] font-bold text-sm uppercase flex items-center gap-1">
+              <span className="text-gray-700 group-hover:text-red-600 font-bold text-sm uppercase flex items-center gap-1">
                 Explore All{" "}
                 <FaChevronDown
                   className={`text-[10px] transition-transform ${isMegaMenuOpen ? "rotate-180" : ""}`}
@@ -212,7 +212,7 @@ export default function Header() {
             </div>
             <Link
               href="/contact"
-              className="text-gray-700 hover:text-[#00a400] font-bold text-sm uppercase"
+              className="text-gray-700 hover:text-red-600 font-bold text-sm uppercase"
             >
               Contact
             </Link>

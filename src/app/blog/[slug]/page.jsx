@@ -40,18 +40,18 @@ const BlogDetails = () => {
   }, [slug]);
 
   if (loading) {
-    return <p className="text-center py-16 text-lg">Loading...</p>;
+    return <p className="text-center py-24 text-lg text-black">Loading...</p>;
   }
 
   if (error) {
-    return <p className="text-center py-16 text-red-500">{error}</p>;
+    return <p className="text-center py-24 text-red-600">{error}</p>;
   }
 
   return (
-    <article className="bg-white">
+    <article className="bg-white min-h-screen text-black">
 
       {/* ================= HERO IMAGE ================= */}
-      <section className="relative w-full h-[70vh]">
+      <section className="relative w-full h-[80vh]">
         <Image
           src={blog.image}
           alt={blog.title}
@@ -60,26 +60,31 @@ const BlogDetails = () => {
           className="object-cover"
         />
 
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/50" />
 
-        {/* Hero Content */}
         <div className="absolute inset-0 flex items-center justify-center px-6">
-          <div className="max-w-4xl text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
+          <div className="max-w-5xl text-center text-white">
+            <span className="inline-block mb-3 px-4 py-1 text-xs tracking-widest uppercase bg-white/20 rounded-full">
+              {blog.category}
+            </span>
+
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
               {blog.title}
             </h1>
           </div>
         </div>
       </section>
 
-      <div className="p-8">
-          {/* Category & Date */}
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-4">
-            <span className="px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 font-semibold">
+      {/* ================= CONTENT ================= */}
+      <section className="relative -mt-24 px-4">
+        <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-12">
+
+          {/* Meta */}
+          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-700 mb-6">
+            <span className="px-3 py-1 rounded-full bg-black text-white font-semibold">
               {blog.category}
             </span>
-            <span>
+            <span className="tracking-wide">
               {new Date(blog.createdAt).toLocaleDateString("en-IN", {
                 day: "numeric",
                 month: "long",
@@ -88,24 +93,21 @@ const BlogDetails = () => {
             </span>
           </div>
 
-          {/* Title */}
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
-            {blog.title}
-          </h1>
-
           {/* Short Description */}
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-xl text-black leading-relaxed border-l-4 border-black pl-4 mb-10">
             {blog.description}
           </p>
 
-          {/* HTML Content */}
+          {/* Main Content */}
           <div
-            className="prose max-w-none text-gray-800"
+            className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:leading-relaxed prose-a:text-black hover:prose-a:underline"
             dangerouslySetInnerHTML={{
               __html: blog.slugContent,
             }}
           />
         </div>
+      </section>
+
     </article>
   );
 };
