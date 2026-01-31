@@ -1,19 +1,22 @@
 import Link from "next/link";
-import { 
-  FaFacebookF, 
-  FaInstagram, 
-  FaMapMarkerAlt, 
-  FaPhoneAlt, 
-  FaEnvelope, 
-  FaChevronRight, 
-  FaPaperPlane, 
-  FaHeart 
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaChevronRight,
+  FaPaperPlane,
+  FaHeart,
 } from "react-icons/fa";
 
 export default function Footer() {
   const socialLinks = [
     { icon: FaFacebookF, url: "https://www.facebook.com/share/1GM5h8u3r8/" },
-    { icon: FaInstagram, url: "https://www.instagram.com/yatra.karo?igsh=d3o0Nmk1dzNibmt0" },
+    {
+      icon: FaInstagram,
+      url: "https://www.instagram.com/yatra.karo?igsh=d3o0Nmk1dzNibmt0",
+    },
   ];
 
   const quickLinks = [
@@ -47,13 +50,16 @@ export default function Footer() {
   const contactInfo = [
     { icon: FaMapMarkerAlt, text: "Jaipur, Rajasthan, India" },
     { icon: FaPhoneAlt, text: "+91 73070 22824", link: "tel:+917307022824" },
-    { icon: FaEnvelope, text: "support@yatrakarotravels.com", link: "mailto:support@yatrakarotravels.com" },
+    {
+      icon: FaEnvelope,
+      text: "support@yatrakarotravels.com",
+      link: "mailto:support@yatrakarotravels.com",
+    },
   ];
 
   return (
     <footer className="relative bg-black text-gray-200 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-5 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-10 relative z-10">
-        
         {/* ABOUT SECTION */}
         <div>
           <img
@@ -63,16 +69,17 @@ export default function Footer() {
           />
           {/* <h2 className="text-sm font-bold text-orange-400 mb-4">ParvatYatra</h2> */}
           <p className="mb-4 leading-[22px] text-sm opacity-90">
-            ParvatYatra is your trusted travel companion for unforgettable
-            mountain adventures. We craft scenic journeys across India’s
-            majestic hills, offering trekking expeditions, serene retreats,
-            camping under starlit skies, and personalized adventure tours.
+            YatraKaroTravels is your reliable travel partner for memorable
+            journeys across India. We design thoughtfully curated travel
+            experiences including scenic tours, cultural explorations, peaceful
+            retreats, thrilling adventures, and fully customized holiday
+            packages.
           </p>
-          <p className="mb-4 leading-[22px] text-sm opacity-90"> 
-            With expert guides, comfortable accommodations, and well-planned
-            itineraries, we ensure every trip is seamless, safe, and truly
-            memorable—helping you explore, connect with nature, and create
-            lifelong memories.
+          <p className="mb-4 leading-[22px] text-sm opacity-90">
+            With expert planning, trusted local guides, comfortable
+            accommodations, and seamless itineraries, we ensure every trip is
+            smooth, safe, and truly enriching — helping you explore new
+            destinations, connect with cultures, and create lifelong memories.
           </p>
 
           {/* Social Icons */}
@@ -198,8 +205,9 @@ export default function Footer() {
       {/* FOOTER BOTTOM */}
       <div className="mt-16 pt-8 border-t border-gray-700 text-center opacity-70 text-sm">
         <p>
-          © 2024 ParvatYatra Travel Agency. All Rights Reserved. | Designed with{" "}
-          <FaHeart className="inline text-sky-400" /> by ParvatYatra Development Team
+          © 2024 YatraKaroTravels. All Rights Reserved. | Designed with{" "}
+          <FaHeart className="inline text-sky-400" /> by YatraKaroTravels
+          Development Team
         </p>
       </div>
     </footer>

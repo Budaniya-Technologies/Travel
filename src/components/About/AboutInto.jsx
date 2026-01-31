@@ -14,26 +14,26 @@ export default function AboutIntro() {
             </h2>
 
             <p className="mt-2 text-gray-600 text-md leading-[20px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis
-              eros at lacus feugiat hendrerit sed ut tortor. Suspendisse et
-              magna quis elit efficitur consequat. Mauris eleifend velit a
-              pretium iaculis. Donec sagittis velit et magna euismod, vel
-              aliquet nulla malesuada. Nunc pharetra massa lectus, a fermentum
-              arcu volutpat vel.
+              Based in Rajasthan, YatraKaroTravels delivers thoughtfully crafted
+              travel projects and tour packages that combine comfort, culture,
+              and adventure. Our focus is on providing seamless planning,
+              high-quality services, and memorable journeys tailored to meet
+              every traveler’s expectations.
             </p>
           </div>
 
           {/* Right Image */}
           <div className="mt-12 md:mt-0">
-            <Link href="/all-packages">"
-            <button
-              type="button"
-              className="px-8 py-4 rounded-full font-semibold text-white 
+            <Link href="/all-packages">
+              "
+              <button
+                type="button"
+                className="px-8 py-4 rounded-full font-semibold text-white 
   bg-blue-600 hover:bg-blue-500 transition-all duration-300
   shadow-md hover:shadow-lg"
-            >
-              View All Popular Packages
-            </button>
+              >
+                View All Popular Packages
+              </button>
             </Link>
           </div>
         </div>
