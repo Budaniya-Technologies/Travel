@@ -72,78 +72,69 @@ export default function AllPackage() {
           </p>
         </div>
       </section>
-
-      {/* ================= PACKAGES SECTION ================= */}
-      <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="mb-5">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
+     {/* ================= PACKAGES SECTION ================= */}
+      <section className="py-8 md:py-12 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4">
+          <div className="mb-6 px-1">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight">
               Explore Our Best <span className="text-orange-600">Packages</span>
             </h2>
 
-            <p className="mt-2 text-sm sm:text-base text-gray-600 max-w-2xl">
-              Handpicked travel packages designed for comfort, adventure, and
-              unforgettable experiences.
+            <p className="mt-2 text-xs sm:text-base text-gray-600 max-w-2xl">
+              Handpicked travel packages designed for comfort and adventure.
             </p>
 
-            {/* Decorative underline */}
-            <div className="mt-4 h-1 w-20 bg-orange-600 rounded-full"></div>
+            <div className="mt-3 h-1 w-16 bg-orange-600 rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {/* Grid updated: grid-cols-2 for mobile (small screens) */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
             {packageData.map((pkg) => (
               <Link
                 key={pkg.slug}
                 href={`/all-packages/${pkg.slug}`}
-                className="group"
+                className="group flex"
               >
-                <div className="bg-white/90 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 transition">
-                  <div className="relative h-60">
+                <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col w-full">
+                  {/* Reduced height for mobile to keep the 2-column view balanced */}
+                  <div className="relative h-32 sm:h-48 md:h-60">
                     <img
                       src={pkg.image}
                       alt={pkg.title}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    <h3 className="absolute bottom-4 left-4 text-white text-xl font-bold">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <h3 className="absolute bottom-2 left-2 right-2 text-white text-xs sm:text-lg font-bold line-clamp-1">
                       {pkg.title}
                     </h3>
                   </div>
 
-                  <div className="p-5 space-y-2">
-                    <p className="text-gray-600 text-sm">
-                      {pkg.description?.split(" ").slice(0, 8).join(" ")}
-                      {pkg.description?.split(" ").length > 8 && "..."}
+                  <div className="p-3 sm:p-5 flex flex-col flex-grow space-y-1 sm:space-y-2">
+                    {/* Description hidden on very small mobile to save space, visible on sm+ */}
+                    <p className="text-gray-600 text-[10px] sm:text-sm line-clamp-2 hidden sm:block">
+                      {pkg.description?.split(" ").slice(0, 8).join(" ")}...
                     </p>
 
-                    <p className="text-blue-700 font-medium">
-                      📍 {pkg.pickUpPoint} - {pkg.dropPoint}
+                    <p className="text-blue-700 font-medium text-[10px] sm:text-sm truncate">
+                      📍 {pkg.pickUpPoint}
                     </p>
 
-                    <p className="text-gray-500 text-sm">⏳ {pkg.duration}</p>
+                    <div className="flex justify-between items-center">
+                      <p className="text-gray-500 text-[10px] sm:text-sm">⏳ {pkg.duration}</p>
+                    </div>
 
-                    <p className="text-lg font-bold text-green-600">
-                      ₹ {pkg.price} /-
+                    <p className="text-sm sm:text-lg font-bold text-green-600">
+                      ₹{pkg.price}
                     </p>
 
-                    <div className="flex gap-3 mt-3">
-                      <Link
-                        href={`/all-packages/${pkg.slug}`}
-                        className="flex-1"
-                      >
-                        <button className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">
-                          Book Now
+                    {/* Stacked buttons for mobile, side-by-side for desktop */}
+                    <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-3 mt-auto pt-2">
+                        <button className="w-full bg-indigo-600 text-white py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-sm font-semibold hover:bg-indigo-700">
+                          Book
                         </button>
-                      </Link>
-
-                      <Link
-                        href={`/all-packages/${pkg.slug}`}
-                        className="flex-1"
-                      >
-                        <button className="w-full border border-indigo-600 text-indigo-600 py-2 rounded-lg hover:bg-indigo-600 hover:text-white">
+                        <button className="w-full border border-indigo-600 text-indigo-600 py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-sm font-semibold hover:bg-indigo-600 hover:text-white">
                           Details
                         </button>
-                      </Link>
                     </div>
                   </div>
                 </div>
