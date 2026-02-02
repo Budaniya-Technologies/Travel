@@ -145,7 +145,7 @@ export default function PackageDetails() {
 
           {/* RIGHT SIDEBAR (1/3 width) */}
           <div className="lg:col-span-1">
-            <div className="sticky top-8 bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-8">
+            <div className=" sticky top-8 bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <p className="text-slate-500 text-sm font-medium">

@@ -7,36 +7,66 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import Link from "next/link";
 
+
 const slides = [
   {
     id: 1,
     badge: "✨ Discover Your Next Adventure",
     title: "Explore",
     highlight: "The World",
-    bg: "https://i.pinimg.com/1200x/8c/aa/96/8caa968e1b2cdba9375dbc3c881e66b9.jpg",
+    bg: "/11.jpg",
   },
   {
     id: 2,
     badge: "🌴 Luxury Travel Experience",
     title: "Plan",
     highlight: "Your Journey",
-    bg: "https://i.pinimg.com/736x/fa/01/d8/fa01d8991fc8953feb71750370a7d219.jpg",
+    bg: "/3.jpg",
   },
   {
     id: 3,
     badge: "✈️ Seamless Travel Solutions",
     title: "Discover",
     highlight: "New Places",
-    bg: "https://i.pinimg.com/736x/6d/b6/82/6db6823b78ce179383aed77e0de29dd5.jpg",
+    bg: "/8.jpg",
   },
   {
     id: 4,
     badge: "🏔️ Nature & Serenity",
     title: "Feel",
     highlight: "The Escape",
-    bg: "https://i.pinimg.com/736x/23/bc/01/23bc0131b8ae332e29be3b06570c1d8d.jpg",
+    bg: "/4.jpg",
+  },
+  {
+    id: 5,
+    badge: "🏖️ Beachside Bliss",
+    title: "Relax",
+    highlight: "By The Sea",
+    bg: "/9.jpg",
+  },
+  {
+    id: 6,
+    badge: "🌄 Mountain Adventures",
+    title: "Climb",
+    highlight: "New Heights",
+    bg: "/10.jpg",
+  },
+  {
+    id: 7,
+    badge: "🏕️ Outdoor Escapes",
+    title: "Camp",
+    highlight: "Under Stars",
+    bg: "/5.jpg",
+  },
+  {
+    id: 8,
+    badge: "🌍 Cultural Journeys",
+    title: "Experience",
+    highlight: "True Traditions",
+    bg: "/7.jpg",
   },
 ];
+
 
 export default function TravelHero() {
   return (

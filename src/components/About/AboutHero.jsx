@@ -7,7 +7,7 @@ const AboutHero = () => {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=2000')`,
+          backgroundImage: `url('/12.jpg')`,
         }}
       >
         {/* Gradient Overlay */}

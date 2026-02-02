@@ -3,14 +3,14 @@ import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination, Autoplay } from "swiper/modules";
+import "swiper/css/grid"; // Import Grid styles
+import { Pagination, Autoplay, Grid } from "swiper/modules"; // Import Grid module
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { apiGet } from "../../../Utils/http";
 import Link from "next/link";
 
 const getAllPackage = `apiUser/v1/frontend/getAllPackage?websiteId=${process.env.NEXT_PUBLIC_WEBSITE_ID}`;
 
-/* ========== NEW: BACKGROUND IMAGES ARRAY (MAPPING OBJECT) ========== */
 const backgroundImages = [
   {
     id: 1,
@@ -28,8 +28,6 @@ const backgroundImages = [
 
 const FeaturedProgram = () => {
   const swiperRef = useRef(null);
-
-  /* ========== AUTO BACKGROUND CHANGE LOGIC ========== */
   const [bgIndex, setBgIndex] = useState(0);
   const [packageData, setPackageData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -44,9 +42,7 @@ const FeaturedProgram = () => {
           setError("No packages available.");
         }
       })
-      .catch(() => {
-        setError("Failed to load packages.");
-      })
+      .catch(() => setError("Failed to load packages."))
       .finally(() => setLoading(false));
   }, []);
 
@@ -55,8 +51,7 @@ const FeaturedProgram = () => {
       setBgIndex((prev) =>
         prev === backgroundImages.length - 1 ? 0 : prev + 1,
       );
-    }, 4000); // change every 4 seconds
-
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -71,28 +66,22 @@ const FeaturedProgram = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Dark overlay */}
- <div className="absolute inset-0 bg-black/60 pointer-events-none"></div>
-
+      <div className="absolute inset-0 bg-black/60 pointer-events-none"></div>
 
       <div className="relative max-w-[1440px] mx-auto px-6 md:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          {/* LEFT SIDE HEADING + DESCRIPTION */}
           <div className="text-white space-y-4">
             <span className="text-cyan-400 tracking-widest uppercase text-sm">
               Exclusive Travel Experiences
             </span>
-
             <h2 className="text-4xl md:text-5xl font-bold leading-tight">
               Discover Your Next <br /> Dream Destination
             </h2>
-
             <p className="text-gray-200 max-w-lg">
               Handpicked luxury and adventure travel packages crafted for
               unforgettable memories. From romantic escapes to thrilling
               expeditions, we bring the world closer to you.
             </p>
-
             <div className="flex gap-4 mt-4">
               <Link href="/all-packages">
                 <button className="px-6 py-3 bg-cyan-500 text-black font-semibold rounded-full hover:bg-cyan-400 transition">
@@ -107,82 +96,62 @@ const FeaturedProgram = () => {
             </div>
           </div>
 
-          {/* RIGHT SIDE: SWIPER */}
-          <div className="relative">
-            {/* <button
-              onClick={() => swiperRef.current?.slidePrev()}
-              className="absolute -left-6 top-1/2 z-10 bg-white text-black p-3 rounded-full shadow-md"
-            >
-              <FaChevronLeft />
-            </button> */}
-
-            {/* <button
-              onClick={() => swiperRef.current?.slideNext()}
-              className="absolute -right-6 top-1/2 z-10 bg-white text-black p-3 rounded-full shadow-md"
-            >
-              <FaChevronRight />
-            </button> */}
-
+          <div className="relative featured-swiper-container">
             <Swiper
-              modules={[Pagination, Autoplay]}
-              spaceBetween={25}
-              loop={true}
+              modules={[Pagination, Autoplay, Grid]} // Added Grid module
+              spaceBetween={15} // Reduced space for mobile fitting
+              loop={false} // Loop must be false when using Swiper Grid
               autoplay={{ delay: 3500 }}
               pagination={{ clickable: true }}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
               breakpoints={{
-                320: { slidesPerView: 1 },
-                640: { slidesPerView: 2 },
-                1024: { slidesPerView: 2 },
+                // Mobile: 2 columns, 2 rows
+                320: {
+                  slidesPerView: 2,
+                  grid: { rows: 2, fill: "row" },
+                },
+                // Tablet/Desktop: 2 columns, 1 row
+                1024: {
+                  slidesPerView: 2,
+                  grid: { rows: 1 },
+                },
               }}
+              className="pb-12"
             >
               {packageData.map((pkg) => (
                 <SwiperSlide key={pkg.id}>
-                  <div className="bg-white/90 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl hover:-translate-y-2 transition">
-                    <div className="relative h-60">
+                  <div className="bg-white/90 backdrop-blur-lg rounded-xl overflow-hidden shadow-xl hover:-translate-y-1 transition h-full flex flex-col">
+                    <div className="relative h-32 md:h-60">
+                      {" "}
+                      {/* Reduced height for mobile */}
                       <img
                         src={pkg.image}
                         alt={pkg.title}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                      <h3 className="absolute bottom-4 left-4 text-white text-xl font-bold">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                      <h3 className="absolute bottom-2 left-2 text-white text-xs md:text-xl font-bold line-clamp-1">
                         {pkg.title}
                       </h3>
                     </div>
 
-                    <div className="p-5 space-y-2">
-                     <p className="text-gray-600 text-sm">
-                      {pkg.description?.split(" ").slice(0, 8).join(" ")}
-                      {pkg.description?.split(" ").length > 8 && "..."}
-                    </p>
-
-                      <p className="text-blue-700 font-medium">
-                        📍 {pkg.pickUpPoint} - {pkg.dropPoint}
+                    <div className="p-3 md:p-5 space-y-1 md:space-y-2 flex-grow">
+                      <p className="text-gray-600 text-[10px] md:text-sm line-clamp-2">
+                        {pkg.description}
                       </p>
-
-                      <p className="text-gray-500 text-sm">⏳ {pkg.duration}</p>
-
-                      <p className="text-lg font-bold text-green-600">
-                        ₹ {pkg.price}
+                      <p className="text-blue-700 font-medium text-[10px] md:text-base truncate">
+                        📍 {pkg.pickUpPoint}
                       </p>
-
-                      <div className="flex gap-3 mt-3">
+                      <p className="text-lg font-bold text-green-600 text-sm md:text-lg">
+                        ₹{pkg.price}
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-2 mt-2">
                         <Link
                           href={`/all-packages/${pkg.slug}`}
                           className="flex-1"
                         >
-                          <button className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">
-                            Book Now
-                          </button>
-                        </Link>
-
-                        <Link
-                          href={`/all-packages/${pkg.slug}`}
-                          className="flex-1"
-                        >
-                          <button className="w-full border border-indigo-600 text-indigo-600 py-2 rounded-lg hover:bg-indigo-600 hover:text-white">
-                            Details
+                          <button className="w-full bg-indigo-600 text-white py-1.5 md:py-2 rounded-lg text-[10px] md:text-sm hover:bg-indigo-700">
+                            Book
                           </button>
                         </Link>
                       </div>
