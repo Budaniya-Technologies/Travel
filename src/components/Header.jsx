@@ -55,7 +55,7 @@ export default function Header() {
   }, []);
 
   return (
-    <nav className="w-full fixed top-0 left-0 z-50 shadow-lg bg-white font-sans">
+    <nav className="w-full fixed top-0 left-0 z-50 shadow-lg bg-white font-sans ">
       {/* --- TOP BAR (GREEN) --- */}
       <div className="bg-orange-600 text-white px-4 md:px-6 py-2 flex flex-wrap items-center justify-between gap-y-2">
 
@@ -189,7 +189,7 @@ export default function Header() {
                   <div className="max-w-7xl mx-auto grid grid-cols-5 gap-8 p-8">
                     {dropdownLinks.map((category, idx) => (
                       <div key={idx} className="flex flex-col gap-3">
-                        <h3 className="text-[#00a400] font-black text-xs uppercase tracking-widest border-b pb-2">
+                        <h3 className="text-black font-black text-sm uppercase tracking-widest border-b pb-2">
                           {category.title}
                         </h3>
                         <ul className="flex flex-col gap-2">
@@ -197,7 +197,7 @@ export default function Header() {
                             <li key={i}>
                               <Link
                                 href={opt.link}
-                                className="text-gray-600 hover:text-black hover:translate-x-1 transition-all text-[13px] font-medium inline-block"
+                                className="text-gray-800 hover:text-black hover:translate-x-1 transition-all text-[16px] font-medium inline-block"
                               >
                                 {opt.label}
                               </Link>

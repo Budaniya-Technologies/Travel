@@ -13,37 +13,38 @@ import "swiper/css/pagination";
 const teamData = [
   {
     id: 1,
-    name: "Honymoon trips",
-    role: "Trevel with Your Love",
+    name: "Honeymoon Trips",
+    role: "Travel with Your Love",
     img: "https://i.pinimg.com/1200x/fe/a2/f6/fea2f6e5a464b0fa11529eb28ccfa698.jpg",
     discription:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?",
+      "Create unforgettable romantic memories with our perfectly crafted honeymoon packages. Enjoy luxury stays, breathtaking destinations, and seamless travel experiences designed especially for couples in love.",
   },
   {
     id: 2,
-    name: "Family Trps",
-    role: "Trevel with Your Family",
+    name: "Family Trips",
+    role: "Travel with Your Family",
     img: "https://i.pinimg.com/736x/d6/17/54/d617543e81c95aff42d5e2801b39cabf.jpg",
     discription:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?",
+      "Experience joyful family vacations with comfortable stays, safe travel, and fun-filled itineraries. Our family tour packages are designed to create cherished moments for all age groups.",
   },
   {
     id: 3,
     name: "Solo Trip",
-    role: "Trevel In Peace",
+    role: "Travel in Peace",
     img: "https://i.pinimg.com/736x/20/ef/9d/20ef9d6ce8c29353a2e76a6d90c2a5f2.jpg",
     discription:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?",
+      "Discover yourself through peaceful solo journeys. Explore stunning destinations, embrace new cultures, and enjoy complete freedom with our safe and personalized solo travel experiences.",
   },
   {
     id: 4,
-    name: "Groups Trips",
-    role: "Trevel In Bus",
+    name: "Group Trips",
+    role: "Travel Together",
     img: "https://i.pinimg.com/736x/e9/6b/bd/e96bbd51a3d2f0a76cbba7260576cb7b.jpg",
     discription:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?",
+      "Make every trip exciting with friends, colleagues, or communities. Our group tour packages offer comfortable transport, fun activities, and unforgettable shared travel adventures.",
   },
 ];
+
 
 // Framer Motion animation for cards
 const cardAnimation = {
