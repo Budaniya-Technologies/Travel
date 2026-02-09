@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 import { apiGet } from "../../../../Utils/http";
 import { MapPin, Clock, FileText, CheckCircle } from "lucide-react"; // Suggested icons
 
-
 export default function PackageDetails() {
   const { slug } = useParams();
 
@@ -42,6 +41,30 @@ export default function PackageDetails() {
       </div>
     );
   }
+
+const handleWhatsApp = () => {
+  if (!pkg) return;
+
+  const phoneNumber = "918949406003"; // with country code
+
+  const message = `Hi 👋
+
+I want to book this package:
+
+📍 Package: ${pkg.title}
+💰 Price: ₹${pkg.price} per person
+🗺 Route: ${pkg.pickUpPoint} → ${pkg.dropPoint}
+⏳ Duration: ${pkg.duration}
+
+Please share availability and booking details.`;
+
+  const encodedMessage = encodeURIComponent(message);
+
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+  window.open(whatsappURL, "_blank");
+};
+
 
   if (error) {
     return (
@@ -85,62 +108,61 @@ export default function PackageDetails() {
           {/* LEFT CONTENT */}
           <div className="lg:col-span-2 space-y-10">
             {/* Rounded Info Cards */}
-           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-  {[
-    {
-      icon: <MapPin size={22} />,
-      label: "Route",
-      value: `${pkg.pickUpPoint} → ${pkg.dropPoint}`,
-      color: "from-indigo-500 to-cyan-500",
-    },
-    {
-      icon: <Clock size={22} />,
-      label: "Duration",
-      value: pkg.duration,
-      color: "from-emerald-500 to-teal-500",
-    },
-    {
-      icon: <FileText size={22} />,
-      label: "Itinerary",
-      value: "Download PDF",
-      color: "from-orange-500 to-pink-500",
-      link: pkg.pdf,
-    },
-  ].map((item, i) => (
-    <div
-      key={i}
-      className="flex flex-col items-center text-center space-y-2 group"
-    >
-      {/* Floating Icon */}
-      <div
-        className={`w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br ${item.color} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
-      >
-        {item.icon}
-      </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: <MapPin size={22} />,
+                  label: "Route",
+                  value: `${pkg.pickUpPoint} → ${pkg.dropPoint}`,
+                  color: "from-indigo-500 to-cyan-500",
+                },
+                {
+                  icon: <Clock size={22} />,
+                  label: "Duration",
+                  value: pkg.duration,
+                  color: "from-emerald-500 to-teal-500",
+                },
+                {
+                  icon: <FileText size={22} />,
+                  label: "Itinerary",
+                  value: "Download PDF",
+                  color: "from-orange-500 to-pink-500",
+                  link: pkg.pdf,
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col items-center text-center space-y-2 group"
+                >
+                  {/* Floating Icon */}
+                  <div
+                    className={`w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br ${item.color} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    {item.icon}
+                  </div>
 
-      {/* Label */}
-      <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold">
-        {item.label}
-      </p>
+                  {/* Label */}
+                  <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold">
+                    {item.label}
+                  </p>
 
-      {/* Value */}
-      {item.link ? (
-        <a
-          href={item.link}
-          target="_blank"
-          className="text-sm font-bold text-indigo-600 hover:underline"
-        >
-          {item.value}
-        </a>
-      ) : (
-        <p className="text-sm font-bold text-slate-800">
-          {item.value}
-        </p>
-      )}
-    </div>
-  ))}
-</div>
-
+                  {/* Value */}
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      className="text-sm font-bold text-indigo-600 hover:underline"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    <p className="text-sm font-bold text-slate-800">
+                      {item.value}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
 
             {/* About Content */}
             <div className="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-xl border border-slate-100">
@@ -201,7 +223,10 @@ export default function PackageDetails() {
               </div>
 
               {/* CTA */}
-              <button className="w-full py-4 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:brightness-110 text-white font-bold rounded-full shadow-xl transition active:scale-95">
+              <button
+                onClick={handleWhatsApp}
+                className="w-full py-4 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:brightness-110 text-white font-bold rounded-full shadow-xl transition active:scale-95"
+              >
                 Book This Experience
               </button>
 
