@@ -42,6 +42,30 @@ export default function PackageDetails() {
     );
   }
 
+const handleWhatsApp = () => {
+  if (!pkg) return;
+
+  const phoneNumber = "918949406003"; // with country code
+
+  const message = `Hi 👋
+
+I want to book this package:
+
+📍 Package: ${pkg.title}
+💰 Price: ₹${pkg.price} per person
+🗺 Route: ${pkg.pickUpPoint} → ${pkg.dropPoint}
+⏳ Duration: ${pkg.duration}
+
+Please share availability and booking details.`;
+
+  const encodedMessage = encodeURIComponent(message);
+
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+  window.open(whatsappURL, "_blank");
+};
+
+
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center text-red-500">
@@ -81,100 +105,128 @@ export default function PackageDetails() {
       {/* ================= CONTENT SECTION ================= */}
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* LEFT CONTENT (2/3 width) */}
+          {/* LEFT CONTENT */}
           <div className="lg:col-span-2 space-y-10">
-            {/* Quick Info Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
-                <div className="p-3 bg-indigo-50 text-indigo-600 rounded-xl">
-                  <MapPin size={24} />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500 uppercase font-semibold">
-                    Route
-                  </p>
-                  <p className="text-sm font-bold text-slate-800">
-                    {pkg.pickUpPoint} → {pkg.dropPoint}
-                  </p>
-                </div>
-              </div>
-              <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
-                <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
-                  <Clock size={24} />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500 uppercase font-semibold">
-                    Duration
-                  </p>
-                  <p className="text-sm font-bold text-slate-800">
-                    {pkg.duration}
-                  </p>
-                </div>
-              </div>
-              <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4 text-indigo-600">
-                <div className="p-3 bg-slate-50 text-slate-600 rounded-xl">
-                  <FileText size={24} />
-                </div>
-                <a
-                  href={pkg.pdf}
-                  target="_blank"
-                  className="text-sm font-bold hover:underline"
+            {/* Rounded Info Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: <MapPin size={22} />,
+                  label: "Route",
+                  value: `${pkg.pickUpPoint} → ${pkg.dropPoint}`,
+                  color: "from-indigo-500 to-cyan-500",
+                },
+                {
+                  icon: <Clock size={22} />,
+                  label: "Duration",
+                  value: pkg.duration,
+                  color: "from-emerald-500 to-teal-500",
+                },
+                {
+                  icon: <FileText size={22} />,
+                  label: "Itinerary",
+                  value: "Download PDF",
+                  color: "from-orange-500 to-pink-500",
+                  link: pkg.pdf,
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col items-center text-center space-y-2 group"
                 >
-                  Download Itinerary
-                </a>
-              </div>
+                  {/* Floating Icon */}
+                  <div
+                    className={`w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br ${item.color} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    {item.icon}
+                  </div>
+
+                  {/* Label */}
+                  <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold">
+                    {item.label}
+                  </p>
+
+                  {/* Value */}
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      className="text-sm font-bold text-indigo-600 hover:underline"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    <p className="text-sm font-bold text-slate-800">
+                      {item.value}
+                    </p>
+                  )}
+                </div>
+              ))}
             </div>
 
-            {/* Main Content Area */}
-            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-slate-100">
-              <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+            {/* About Content */}
+            <div className="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-xl border border-slate-100">
+              <h2 className="text-2xl font-extrabold text-slate-900 mb-6 flex items-center gap-2">
                 About this Journey
               </h2>
+
               {pkg.slugContent ? (
                 <div
-                  className="text-slate-900 prose prose-slate max-w-none prose-headings:font-bold prose-p:text-slate-600"
+                  className="text-black prose prose-slate max-w-none prose-headings:font-bold prose-p:text-slate-600"
                   dangerouslySetInnerHTML={{ __html: pkg.slugContent }}
                 />
               ) : (
-                <p className="text-slate-500 italic">
+                <p className="text-black italic">
                   No additional details provided.
                 </p>
               )}
             </div>
           </div>
 
-          {/* RIGHT SIDEBAR (1/3 width) */}
+          {/* RIGHT SIDEBAR */}
           <div className="lg:col-span-1">
-            <div className=" sticky top-8 bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-8">
-              <div className="flex justify-between items-start mb-6">
+            <div className="sticky top-8 bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 p-8">
+              {/* Price Badge */}
+              <div className="flex justify-between items-center mb-6">
                 <div>
-                  <p className="text-slate-500 text-sm font-medium">
-                    Best Price
+                  <p className="text-xs uppercase text-slate-400 font-semibold">
+                    Starting From
                   </p>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-black text-slate-900">
-                      ₹{pkg.price}
-                    </span>
-                    <span className="text-slate-400 text-sm">/ person</span>
-                  </div>
+                  <h3 className="text-4xl font-black text-indigo-600">
+                    ₹{pkg.price}
+                  </h3>
+                  <p className="text-xs text-slate-400">per person</p>
                 </div>
-                <div className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">
-                  AVAILABLE
-                </div>
+
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">
+                  Available
+                </span>
               </div>
 
+              {/* Features */}
               <div className="space-y-4 mb-8">
-                <div className="flex items-center gap-3 text-sm text-slate-600">
-                  <CheckCircle size={18} className="text-green-500" />
-                  <span>Free Cancellation (48h)</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-slate-600">
-                  <CheckCircle size={18} className="text-green-500" />
-                  <span>Instant Confirmation</span>
-                </div>
+                {[
+                  "Free Cancellation (48h)",
+                  "Instant Confirmation",
+                  "24/7 Support",
+                ].map((text, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 text-sm text-slate-600"
+                  >
+                    <div className="w-7 h-7 rounded-full bg-green-100 flex items-center justify-center">
+                      <CheckCircle size={16} className="text-green-600" />
+                    </div>
+                    {text}
+                  </div>
+                ))}
               </div>
 
-              <button className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 transition-all active:scale-95">
+              {/* CTA */}
+              <button
+                onClick={handleWhatsApp}
+                className="w-full py-4 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:brightness-110 text-white font-bold rounded-full shadow-xl transition active:scale-95"
+              >
                 Book This Experience
               </button>
 

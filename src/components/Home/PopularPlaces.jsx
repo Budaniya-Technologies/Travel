@@ -26,28 +26,28 @@ const PopularPlaces = () => {
     {
       id: 1,
       title: "Karala Tour",
-      price: " /-",
+      price: " 12999/-",
       img: "https://i.pinimg.com/736x/31/bc/84/31bc84e0fa95c63cffe8a77f39d3e894.jpg",
       link: "#",
     },
     {
       id: 2,
       title: "Jaisalmer",
-      price: "/-",
+      price: "5499/-",
       img: "https://i.pinimg.com/1200x/97/cb/8f/97cb8f1f5022d5a38ce14e89935911c4.jpg",
       link: "#",
     },
     {
       id: 3,
       title: "Goa Beech",
-      price: "/-",
+      price: "8999/-",
       img: "https://i.pinimg.com/1200x/60/37/9a/60379a968deddaa202abffc3b2f02215.jpg",
       link: "#",
     },
     {
       id: 4,
       title: "Manali",
-      price: "/-",
+      price: "7999/-",
       img: "https://i.pinimg.com/1200x/27/90/8e/27908e1df16216f2530124965f59cdf8.jpg",
       link: "#",
     },
@@ -173,9 +173,9 @@ const PopularPlaces = () => {
                     <div className="flex gap-2">
                       
 
-                      <button className="flex-1 text-xs py-2 rounded-lg border border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition">
+                      {/* <button className="flex-1 text-xs py-2 rounded-lg border border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition">
                         Enquiry Now
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>

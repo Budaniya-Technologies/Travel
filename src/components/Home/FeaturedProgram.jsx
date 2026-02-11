@@ -3,8 +3,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/grid"; // Import Grid styles
-import { Pagination, Autoplay, Grid } from "swiper/modules"; // Import Grid module
+import "swiper/css/grid";
+import { Pagination, Autoplay, Grid } from "swiper/modules";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { apiGet } from "../../../Utils/http";
 import Link from "next/link";
@@ -28,6 +28,7 @@ const backgroundImages = [
 
 const FeaturedProgram = () => {
   const swiperRef = useRef(null);
+
   const [bgIndex, setBgIndex] = useState(0);
   const [packageData, setPackageData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -52,8 +53,17 @@ const FeaturedProgram = () => {
         prev === backgroundImages.length - 1 ? 0 : prev + 1,
       );
     }, 4000);
+
     return () => clearInterval(interval);
   }, []);
+
+  const handlePrev = () => {
+    if (swiperRef.current) swiperRef.current.slidePrev();
+  };
+
+  const handleNext = () => {
+    if (swiperRef.current) swiperRef.current.slideNext();
+  };
 
   return (
     <div
@@ -70,6 +80,7 @@ const FeaturedProgram = () => {
 
       <div className="relative max-w-[1440px] mx-auto px-6 md:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          {/* LEFT CONTENT */}
           <div className="text-white space-y-4">
             <span className="text-cyan-400 tracking-widest uppercase text-sm">
               Exclusive Travel Experiences
@@ -96,21 +107,20 @@ const FeaturedProgram = () => {
             </div>
           </div>
 
+          {/* RIGHT SLIDER */}
           <div className="relative featured-swiper-container">
             <Swiper
-              modules={[Pagination, Autoplay, Grid]} // Added Grid module
-              spaceBetween={15} // Reduced space for mobile fitting
-              loop={false} // Loop must be false when using Swiper Grid
+              modules={[Pagination, Autoplay, Grid]}
+              spaceBetween={15}
+              loop={false}
               autoplay={{ delay: 3500 }}
               pagination={{ clickable: true }}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
               breakpoints={{
-                // Mobile: 2 columns, 2 rows
                 320: {
                   slidesPerView: 2,
                   grid: { rows: 2, fill: "row" },
                 },
-                // Tablet/Desktop: 2 columns, 1 row
                 1024: {
                   slidesPerView: 2,
                   grid: { rows: 1 },
@@ -122,8 +132,6 @@ const FeaturedProgram = () => {
                 <SwiperSlide key={pkg.id}>
                   <div className="bg-white/90 backdrop-blur-lg rounded-xl overflow-hidden shadow-xl hover:-translate-y-1 transition h-full flex flex-col">
                     <div className="relative h-32 md:h-60">
-                      {" "}
-                      {/* Reduced height for mobile */}
                       <img
                         src={pkg.image}
                         alt={pkg.title}
@@ -145,6 +153,7 @@ const FeaturedProgram = () => {
                       <p className="text-lg font-bold text-green-600 text-sm md:text-lg">
                         ₹{pkg.price}
                       </p>
+
                       <div className="flex flex-col sm:flex-row gap-2 mt-2">
                         <Link
                           href={`/all-packages/${pkg.slug}`}
@@ -160,6 +169,21 @@ const FeaturedProgram = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
+
+            {/* ARROWS */}
+            <button
+              onClick={handlePrev}
+              className="absolute -left-4 md:-left-10 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-black p-3 rounded-full shadow-lg transition"
+            >
+              <FaChevronLeft />
+            </button>
+
+            <button
+              onClick={handleNext}
+              className="absolute -right-4 md:-right-10 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-black p-3 rounded-full shadow-lg transition"
+            >
+              <FaChevronRight />
+            </button>
           </div>
         </div>
       </div>
